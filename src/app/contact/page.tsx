@@ -19,8 +19,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { useSearchParams } from 'next/navigation';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
@@ -36,20 +35,39 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 export default function ContactPage() {
   const { toast } = useToast();
-  const searchParams = useSearchParams();
-  const action = searchParams.get('action');
-  const program = searchParams.get('program');
+  
+  const [action, setAction] = useState<string | null>(null);
+  const [program, setProgram] = useState<string | null>(null);
+  
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setAction(urlParams.get("action"));
+    setProgram(urlParams.get("program"));
+  }, []);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: "",
       email: "",
-      subject: action === 'apply' ? 'Solicitud de Admisión' : '',
-      inquiryType: action === 'apply' ? 'admission' : 'general',
-      message: action === 'apply' ? `Estoy interesado/a en aplicar al programa: ${program || 'Indicar programa'}. Por favor, envíenme más información sobre el proceso de admisión.` : '',
+      subject: "",
+      inquiryType: "general",
+      message: "",
     },
   });
+
+  useEffect(() => {
+    if(action || program){
+      const defaultSubject = action === 'apply' ? 'Solicitud de Admisión' : '';
+      const defaultInquiryType = action === 'apply' ? 'admission' : 'general';
+      const defaultMessage = action === 'apply' ? `Estoy interesado/a en aplicar al programa: ${program || 'Indicar programa'}. Por favor, envíenme más información sobre el proceso de admisión.` : '';
+      form.reset({
+        subject: defaultSubject,
+        inquiryType: defaultInquiryType,
+        message: defaultMessage
+      });
+    }
+  }, [action, program, form]);
 
    useEffect(() => {
     // Update default values if search params change after initial load
@@ -63,7 +81,7 @@ export default function ContactPage() {
        inquiryType: form.getValues('inquiryType') || defaultInquiryType,
        message: form.getValues('message') || defaultMessage,
      });
-   }, [action, program, form]);
+   }, [form]);
 
 
   async function onSubmit(data: ContactFormValues) {
