@@ -1,7 +1,10 @@
 
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Building, History, Award, Target } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Building, History, Award, Target, Users, Library, Network, Check, FlaskConical, Handshake, Globe } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 export default function AboutPage() {
   return (
@@ -18,6 +21,60 @@ export default function AboutPage() {
         </header>
 
         <div className="grid gap-12 md:gap-16">
+
+          {/* Quick Links Row */}
+          <section className="w-full">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+             {[
+               { title: "Autoridades", icon: Users, href: "#" }, // Placeholder links
+               { title: "Consejo de Facultad", icon: Library, href: "#" },
+               { title: "Infraestructura", icon: Building, href: "#" },
+               { title: "Organigrama", icon: Network, href: "#" },
+             ].map((item, index) => (
+               <Link key={index} href={item.href} className="block group">
+                 <Card className="text-center hover:shadow-lg transition-shadow duration-300 p-4 h-full flex flex-col justify-center items-center bg-primary/5 hover:bg-primary/10">
+                   <item.icon className="h-8 w-8 text-primary mb-2 transition-transform group-hover:scale-110" />
+                   <CardTitle className="text-base font-semibold text-primary group-hover:underline">{item.title}</CardTitle>
+                 </Card>
+               </Link>
+             ))}
+            </div>
+          </section>
+
+          {/* Director's Message */}
+          <Card className="shadow-md">
+           <CardHeader>
+             <CardTitle className="text-2xl font-semibold text-primary">Mensaje del Director</CardTitle>
+           </CardHeader>
+           <CardContent className="grid md:grid-cols-3 gap-6 items-center">
+             <div className="md:col-span-1 relative h-48 md:h-56 rounded-md overflow-hidden">
+               <Image
+                 src="https://picsum.photos/seed/director/300/400"
+                 alt="Foto del Director/a - Placeholder"
+                 fill
+                 style={{ objectFit: "cover", objectPosition: "top" }}
+                 className="transition-transform duration-500 hover:scale-105"
+               />
+             </div>
+             <div className="md:col-span-2 space-y-4">
+               <p className="text-muted-foreground leading-relaxed">
+                 En nombre de nuestra comunidad académica, les damos la más cordial bienvenida a la Escuela Profesional de Psicología. Nuestra misión es formar profesionales altamente calificados, éticos y comprometidos con el bienestar psicológico individual y social, contribuyendo al desarrollo sostenible de nuestra región y país.
+               </p>
+               <p className="text-muted-foreground leading-relaxed">
+                 Fomentamos un ambiente de aprendizaje colaborativo, investigación innovadora y servicio a la comunidad. Creemos firmemente en el poder de la psicología para transformar vidas y sociedades.
+               </p>
+                <p className="text-muted-foreground leading-relaxed italic">
+                 - [Nombre del Director/a - Placeholder], Director/a
+               </p>
+               {/* Optionally add a button to a longer message if needed */}
+               {/* <Button variant="link" asChild className="p-0 h-auto">
+                 <Link href="/about/directors-message">Leer mensaje completo <ArrowRight className="ml-1 h-4 w-4" /></Link>
+               </Button> */}
+             </div>
+           </CardContent>
+         </Card>
+
+
           {/* Mission Section */}
           <Card className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
              <CardHeader className="bg-primary/10 p-6">
@@ -61,6 +118,54 @@ export default function AboutPage() {
                 </div>
              </CardContent>
            </Card>
+
+            {/* Why Choose Us Section */}
+             <Card className="shadow-md bg-secondary/50">
+               <CardHeader>
+                 <CardTitle className="text-2xl font-semibold text-primary">¿Por qué elegirnos?</CardTitle>
+                 <CardDescription>Descubre las ventajas de estudiar con nosotros.</CardDescription>
+               </CardHeader>
+               <CardContent>
+                 <ul className="space-y-4 text-muted-foreground">
+                   <li className="flex items-start gap-3">
+                     <Check className="h-5 w-5 text-accent mt-1 shrink-0" />
+                     <div>
+                       <h4 className="font-medium text-foreground">Calidad Acreditada</h4>
+                       <p>Programa acreditado por [Organismo Acreditador - Placeholder], garantizando altos estándares educativos.</p>
+                     </div>
+                   </li>
+                   <li className="flex items-start gap-3">
+                     <FlaskConical className="h-5 w-5 text-accent mt-1 shrink-0" />
+                     <div>
+                        <h4 className="font-medium text-foreground">Infraestructura Moderna</h4>
+                        <p>Laboratorios especializados (Gesell, psicometría) y aulas equipadas con tecnología.</p>
+                     </div>
+                   </li>
+                    <li className="flex items-start gap-3">
+                     <Handshake className="h-5 w-5 text-accent mt-1 shrink-0" />
+                      <div>
+                        <h4 className="font-medium text-foreground">Convenios Estratégicos</h4>
+                        <p>Alianzas con instituciones de salud, educativas y empresariales para prácticas preprofesionales.</p>
+                      </div>
+                   </li>
+                   <li className="flex items-start gap-3">
+                     <Globe className="h-5 w-5 text-accent mt-1 shrink-0" />
+                      <div>
+                        <h4 className="font-medium text-foreground">Proyección Internacional</h4>
+                        <p>Oportunidades de intercambio y colaboración con universidades extranjeras.</p>
+                      </div>
+                   </li>
+                   <li className="flex items-start gap-3">
+                     <Users className="h-5 w-5 text-accent mt-1 shrink-0" />
+                      <div>
+                        <h4 className="font-medium text-foreground">Comunidad Activa</h4>
+                        <p>Ambiente estudiantil diverso, participativo y de apoyo mutuo.</p>
+                      </div>
+                   </li>
+                 </ul>
+               </CardContent>
+             </Card>
+
 
           {/* Accreditation Section */}
          <Card className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">

@@ -112,23 +112,6 @@ export default function Home() {
       {/* New Information Section (Inspired by Reference) */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-background">
         <div className="container px-4 md:px-6">
-           {/* Quick Links Row */}
-           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-             {[
-               { title: "Autoridades", icon: Users, href: "#" }, // Placeholder links
-               { title: "Consejo de Facultad", icon: Library, href: "#" },
-               { title: "Infraestructura", icon: Building, href: "#" },
-               { title: "Organigrama", icon: Network, href: "#" },
-             ].map((item, index) => (
-               <Link key={index} href={item.href} className="block group">
-                 <Card className="text-center hover:shadow-lg transition-shadow duration-300 p-6 h-full flex flex-col justify-center items-center bg-primary/5 hover:bg-primary/10">
-                   <item.icon className="h-10 w-10 text-primary mb-3 transition-transform group-hover:scale-110" />
-                   <CardTitle className="text-lg font-semibold text-primary group-hover:underline">{item.title}</CardTitle>
-                 </Card>
-               </Link>
-             ))}
-           </div>
-
            {/* Main Content Grid */}
            <div className="grid lg:grid-cols-3 gap-12">
              {/* Director's Message */}
