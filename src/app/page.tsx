@@ -1,4 +1,3 @@
-// No client directive needed as styled-jsx is removed
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,28 +9,38 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]"> {/* Adjust for header height */}
       {/* Hero Section */}
-      <section className="relative w-full py-20 md:py-32 lg:py-40 bg-gradient-to-b from-primary/10 to-background">
-         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 opacity-50"></div>
-         <div className="container px-4 md:px-6 text-center relative z-10">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-primary mb-4 animate-fade-in-up">
-              Explora el Mundo de la Psicología
-            </h1>
-            <p className="mb-8 text-lg text-muted-foreground md:text-xl animate-fade-in-up animation-delay-200">
-              Descubre nuestros programas, conoce a nuestros docentes y mantente al día con las últimas noticias de la Escuela Profesional de Psicología.
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row justify-center animate-fade-in-up animation-delay-400">
-              <Button size="lg" asChild className="transition-transform hover:scale-105">
-                <Link href="/programs">
-                  Ver Programas <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild className="transition-transform hover:scale-105">
-                <Link href="/contact?action=inquire">
-                  Solicitar Información
-                </Link>
-              </Button>
-            </div>
+      <section className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] flex items-center justify-center text-center">
+        {/* Background Image */}
+        <Image
+          src="https://picsum.photos/seed/psychology-hero/1920/1080" // Replace with a relevant high-quality image
+          alt="Escuela Profesional de Psicología"
+          layout="fill"
+          objectFit="cover"
+          className="absolute inset-0 z-0"
+          priority // Load image quickly
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50 z-10"></div> {/* Dark overlay */}
+
+        {/* Content Box */}
+        <div className="container px-4 md:px-6 relative z-20 max-w-3xl mx-auto bg-black/30 backdrop-blur-sm p-8 rounded-lg shadow-xl">
+          <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-white mb-4 animate-fade-in-up">
+            Explora el Mundo de la Psicología
+          </h1>
+          <p className="mb-8 text-lg text-neutral-200 md:text-xl animate-fade-in-up animation-delay-200">
+            Descubre nuestros programas, conoce a nuestros docentes y mantente al día con las últimas noticias de la Escuela Profesional de Psicología.
+          </p>
+          <div className="flex flex-col gap-4 sm:flex-row justify-center animate-fade-in-up animation-delay-400">
+            <Button size="lg" asChild className="transition-transform hover:scale-105 bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Link href="/programs">
+                Ver Programas <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button variant="outline" size="lg" asChild className="transition-transform hover:scale-105 border-white text-white hover:bg-white/10 hover:text-white">
+              <Link href="/contact?action=inquire">
+                Solicitar Información
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -251,7 +260,6 @@ export default function Home() {
          </div>
        </section>
 
-       {/* Removed redundant styled-jsx block. Animations are handled by globals.css */}
     </div>
   );
 }
