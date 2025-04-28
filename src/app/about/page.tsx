@@ -1,7 +1,7 @@
 
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Building, History, Award, Target, Users, Library, Network, Check, FlaskConical, Handshake, Globe } from 'lucide-react';
+import { Building, History, Award, Target, Users, Library, Network, Check, FlaskConical, Handshake, Globe, GraduationCap, BookOpen, Server } from 'lucide-react'; // Added new icons
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -22,24 +22,26 @@ export default function AboutPage() {
 
         <div className="grid gap-12 md:gap-16">
 
-          {/* Quick Links Row */}
+          {/* Quick Links Row (Previously Nuestra Escuela Profesional section) */}
           <section className="w-full">
+             <h2 className="text-3xl font-bold tracking-tight text-center mb-8 text-primary">Nuestra Escuela Profesional</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
              {[
-               { title: "Autoridades", icon: Users, href: "#" }, // Placeholder links
-               { title: "Consejo de Facultad", icon: Library, href: "#" },
-               { title: "Infraestructura", icon: Building, href: "#" },
-               { title: "Organigrama", icon: Network, href: "#" },
+               { title: "Misión y Visión", icon: Target, href: "#mission-vision" }, // Link to sections below
+               { title: "Objetivos Educacionales", icon: BookOpen, href: "#objectives" }, // Placeholder links
+               { title: "Perfil del Egresado", icon: GraduationCap, href: "#graduate-profile" },
+               { title: "Recursos", icon: Server, href: "#resources" }, // Or Library icon
              ].map((item, index) => (
                <Link key={index} href={item.href} className="block group">
                  <Card className="text-center hover:shadow-lg transition-shadow duration-300 p-4 h-full flex flex-col justify-center items-center bg-primary/5 hover:bg-primary/10">
                    <item.icon className="h-8 w-8 text-primary mb-2 transition-transform group-hover:scale-110" />
-                   <CardTitle className="text-base font-semibold text-primary group-hover:underline">{item.title}</CardTitle>
+                   <CardTitle className="text-sm md:text-base font-semibold text-primary group-hover:underline">{item.title}</CardTitle>
                  </Card>
                </Link>
              ))}
             </div>
           </section>
+
 
           {/* Director's Message */}
           <Card className="shadow-md">
@@ -76,17 +78,22 @@ export default function AboutPage() {
 
 
           {/* Mission Section */}
-          <Card className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+          <Card id="mission-vision" className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 scroll-mt-20">
              <CardHeader className="bg-primary/10 p-6">
                  <div className="flex items-center gap-4">
                    <Target className="h-8 w-8 text-primary" />
-                   <CardTitle className="text-2xl font-semibold text-primary">Nuestra Misión</CardTitle>
+                   <CardTitle className="text-2xl font-semibold text-primary">Nuestra Misión y Visión</CardTitle>
                  </div>
                </CardHeader>
             <CardContent className="p-6 md:p-8">
-              <p className="text-muted-foreground leading-relaxed">
+             <h3 className="text-xl font-semibold text-foreground mb-2">Misión</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">
                 Formar profesionales de la psicología con sólidos conocimientos científicos, habilidades clínicas y un fuerte compromiso ético y social. Buscamos contribuir al bienestar individual y colectivo a través de la investigación, la docencia y la extensión universitaria, promoviendo una comprensión profunda del comportamiento humano y sus contextos.
               </p>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Visión</h3>
+               <p className="text-muted-foreground leading-relaxed">
+                 Ser una escuela líder y referente a nivel nacional e internacional en la formación de psicólogos, reconocida por su excelencia académica, innovación en investigación y contribución significativa al desarrollo social y al bienestar psicológico de la comunidad. (Placeholder Vision)
+               </p>
             </CardContent>
           </Card>
 
@@ -189,8 +196,89 @@ export default function AboutPage() {
               </div> */}
              </CardContent>
            </Card>
+
+            {/* Additional Sections based on Quick Links */}
+             <Card id="objectives" className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 scroll-mt-20">
+                <CardHeader className="bg-primary/10 p-6">
+                 <div className="flex items-center gap-4">
+                   <BookOpen className="h-8 w-8 text-primary" />
+                   <CardTitle className="text-2xl font-semibold text-primary">Objetivos Educacionales</CardTitle>
+                 </div>
+               </CardHeader>
+               <CardContent className="p-6 md:p-8">
+                 <p className="text-muted-foreground leading-relaxed mb-4">Nuestros objetivos se centran en:</p>
+                 <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                    <li>Proporcionar una sólida formación teórica y metodológica en psicología.</li>
+                    <li>Desarrollar habilidades clínicas y de intervención eficaces y éticas.</li>
+                    <li>Fomentar el pensamiento crítico y la capacidad de investigación.</li>
+                    <li>Promover el compromiso social y la aplicación del conocimiento psicológico para el bienestar comunitario.</li>
+                    <li>Cultivar el desarrollo personal y profesional continuo de nuestros estudiantes.</li>
+                    {/* Add more specific objectives */}
+                 </ul>
+               </CardContent>
+             </Card>
+
+             <Card id="graduate-profile" className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 scroll-mt-20">
+               <CardHeader className="bg-primary/10 p-6">
+                 <div className="flex items-center gap-4">
+                   <GraduationCap className="h-8 w-8 text-primary" />
+                   <CardTitle className="text-2xl font-semibold text-primary">Perfil del Egresado</CardTitle>
+                 </div>
+               </CardHeader>
+               <CardContent className="p-6 md:p-8">
+                 <p className="text-muted-foreground leading-relaxed mb-4">
+                   El egresado de la Escuela Profesional de Psicología será un profesional competente, ético y reflexivo, capaz de:
+                 </p>
+                 <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                   <li>Evaluar, diagnosticar e intervenir en problemáticas psicológicas individuales, grupales y comunitarias.</li>
+                   <li>Diseñar y ejecutar proyectos de investigación relevantes en el campo de la psicología.</li>
+                   <li>Aplicar conocimientos psicológicos en diversos contextos (clínico, educativo, organizacional, social).</li>
+                   <li>Comunicarse eficazmente y trabajar en equipos multidisciplinarios.</li>
+                   <li>Comprometerse con el aprendizaje continuo y el desarrollo profesional.</li>
+                   {/* Add more profile characteristics */}
+                 </ul>
+               </CardContent>
+             </Card>
+
+             <Card id="resources" className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 scroll-mt-20">
+               <CardHeader className="bg-primary/10 p-6">
+                 <div className="flex items-center gap-4">
+                   <Server className="h-8 w-8 text-primary" />
+                   <CardTitle className="text-2xl font-semibold text-primary">Recursos e Infraestructura</CardTitle>
+                 </div>
+               </CardHeader>
+                <CardContent className="p-6 md:p-8 grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                     <p className="text-muted-foreground leading-relaxed mb-4">
+                       Contamos con instalaciones modernas y recursos para apoyar tu aprendizaje:
+                     </p>
+                     <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                       <li>Cámara Gesell para observación y práctica clínica.</li>
+                       <li>Laboratorio de Psicometría con pruebas actualizadas.</li>
+                       <li>Biblioteca especializada con acceso a bases de datos científicas.</li>
+                       <li>Aulas multimedia equipadas con tecnología audiovisual.</li>
+                       <li>Auditorio para conferencias y eventos académicos.</li>
+                       <li>Plataforma virtual de aprendizaje (PsycheConnect - si aplica).</li>
+                       <li>Salas de estudio y espacios comunes.</li>
+                       {/* Add more resources */}
+                     </ul>
+                    </div>
+                    <div className="relative h-64 rounded-lg overflow-hidden">
+                        <Image
+                           src="https://picsum.photos/seed/resources/600/400"
+                           alt="Instalaciones de la escuela"
+                           fill
+                           style={{ objectFit: 'cover' }}
+                           className="transition-transform duration-500 hover:scale-105"
+                         />
+                    </div>
+                </CardContent>
+             </Card>
+
         </div>
       </div>
     </div>
   );
 }
+
+    
