@@ -1,3 +1,4 @@
+
 'use client'; // Needed for placeholder data simulation
 
 import { useParams } from 'next/navigation';
@@ -134,8 +135,8 @@ export default async function NewsDetailPage() {
              <Image
                src={newsItem.imageUrl}
                alt={`Imagen para ${newsItem.title}`}
-               layout="fill"
-               objectFit="cover"
+               fill // Use fill instead of layout
+               style={{ objectFit: 'cover' }} // Use style for objectFit
                priority // Prioritize loading the main image
              />
           </div>
@@ -151,46 +152,9 @@ export default async function NewsDetailPage() {
         </header>
 
         <div
-           className="prose prose-lg dark:prose-invert max-w-none text-foreground space-y-4"
+           className="prose prose-lg dark:prose-invert max-w-none text-foreground prose-headings:text-primary prose-a:text-accent hover:prose-a:underline prose-blockquote:border-primary prose-blockquote:bg-primary/10 prose-blockquote:text-muted-foreground prose-ul:text-muted-foreground prose-li:text-muted-foreground prose-p:text-muted-foreground dark:prose-blockquote:bg-primary/20 dark:prose-p:text-muted-foreground dark:prose-ul:text-muted-foreground dark:prose-li:text-muted-foreground"
            dangerouslySetInnerHTML={{ __html: newsItem.content }}
          />
-         {/* Basic prose styling adjustments - you might need more specific Tailwind prose plugin config */}
-         <style jsx global>{`
-          .prose h3 {
-            color: hsl(var(--primary));
-          }
-          .prose a {
-            color: hsl(var(--accent));
-            text-decoration: none;
-           }
-           .prose a:hover {
-            text-decoration: underline;
-           }
-           .prose blockquote {
-             border-left-color: hsl(var(--primary));
-             background-color: hsla(var(--primary) / 0.1);
-             color: hsl(var(--muted-foreground));
-            font-style: italic;
-            padding: 1rem;
-            margin-left: 0;
-            margin-right: 0;
-           }
-           .prose ul {
-            color: hsl(var(--muted-foreground));
-           }
-           .prose p {
-            line-height: 1.7;
-            color: hsl(var(--muted-foreground));
-           }
-           .dark .prose blockquote {
-             background-color: hsla(var(--primary) / 0.2);
-             color: hsl(var(--muted-foreground));
-           }
-           .dark .prose p, .dark .prose ul, .dark .prose li {
-              color: hsl(var(--muted-foreground));
-           }
-
-         `}</style>
 
        </article>
      </div>

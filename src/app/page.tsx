@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket } from 'lucide-react';
+import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, Library, Building, Network, Check, FlaskConical, Handshake, Globe, Briefcase } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -14,8 +14,8 @@ export default function Home() {
         <Image
           src="https://picsum.photos/seed/psychology-hero/1920/1080" // Replace with a relevant high-quality image
           alt="Escuela Profesional de Psicología"
-          layout="fill"
-          objectFit="cover"
+          fill // Use fill instead of layout
+          style={{ objectFit: 'cover' }} // Use style for objectFit
           className="absolute inset-0 z-0"
           priority // Load image quickly
         />
@@ -109,8 +109,124 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gallery Section */}
+      {/* New Information Section (Inspired by Reference) */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-background">
+        <div className="container px-4 md:px-6">
+           {/* Quick Links Row */}
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+             {[
+               { title: "Autoridades", icon: Users, href: "#" }, // Placeholder links
+               { title: "Consejo de Facultad", icon: Library, href: "#" },
+               { title: "Infraestructura", icon: Building, href: "#" },
+               { title: "Organigrama", icon: Network, href: "#" },
+             ].map((item, index) => (
+               <Link key={index} href={item.href} className="block group">
+                 <Card className="text-center hover:shadow-lg transition-shadow duration-300 p-6 h-full flex flex-col justify-center items-center bg-primary/5 hover:bg-primary/10">
+                   <item.icon className="h-10 w-10 text-primary mb-3 transition-transform group-hover:scale-110" />
+                   <CardTitle className="text-lg font-semibold text-primary group-hover:underline">{item.title}</CardTitle>
+                 </Card>
+               </Link>
+             ))}
+           </div>
+
+           {/* Main Content Grid */}
+           <div className="grid lg:grid-cols-3 gap-12">
+             {/* Director's Message */}
+             <div className="lg:col-span-2">
+               <Card className="shadow-md h-full">
+                 <CardHeader>
+                   <CardTitle className="text-2xl font-semibold text-primary">Mensaje del Director</CardTitle>
+                 </CardHeader>
+                 <CardContent className="grid md:grid-cols-3 gap-6">
+                   <div className="md:col-span-1 relative h-48 md:h-full rounded-md overflow-hidden">
+                     <Image
+                       src="https://picsum.photos/seed/director/300/400"
+                       alt="Foto del Director/a - Placeholder"
+                       fill
+                       style={{ objectFit: "cover", objectPosition: "top" }}
+                       className="transition-transform duration-500 hover:scale-105"
+                     />
+                   </div>
+                   <div className="md:col-span-2 space-y-4">
+                     <p className="text-muted-foreground leading-relaxed">
+                       En nombre de nuestra comunidad académica, les damos la más cordial bienvenida a la Escuela Profesional de Psicología. Nuestra misión es formar profesionales altamente calificados, éticos y comprometidos con el bienestar psicológico individual y social, contribuyendo al desarrollo sostenible de nuestra región y país.
+                     </p>
+                     <p className="text-muted-foreground leading-relaxed">
+                       Los invitamos a explorar nuestro sitio web y descubrir todo lo que tenemos para ofrecer.
+                       <br /><em>- [Nombre del Director/a - Placeholder]</em>
+                     </p>
+                     <Button variant="link" asChild className="p-0 h-auto">
+                       {/* Link to a potential full message page or about page */}
+                       <Link href="/about">Leer más <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                     </Button>
+                   </div>
+                 </CardContent>
+               </Card>
+             </div>
+
+             {/* Why Choose Us & Career Perspectives */}
+             <div className="space-y-8">
+               {/* Why Choose Us */}
+               <Card className="shadow-md bg-secondary/50">
+                 <CardHeader>
+                   <CardTitle className="text-xl font-semibold text-primary">¿Por qué elegirnos?</CardTitle>
+                 </CardHeader>
+                 <CardContent>
+                   <ul className="space-y-3 text-sm text-muted-foreground">
+                     <li className="flex items-start gap-2">
+                       <Check className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                       <span>Programa acreditado por [Organismo Acreditador - Placeholder].</span>
+                     </li>
+                     <li className="flex items-start gap-2">
+                       <FlaskConical className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                       <span>Laboratorios equipados con tecnología de punta.</span>
+                     </li>
+                      <li className="flex items-start gap-2">
+                       <Handshake className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                       <span>Convenios estratégicos con instituciones nacionales e internacionales.</span>
+                     </li>
+                     <li className="flex items-start gap-2">
+                       <Globe className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                       <span>Oportunidades de intercambio internacional.</span>
+                     </li>
+                     <li className="flex items-start gap-2">
+                       <Users className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                       <span>Comunidad estudiantil diversa y dinámica.</span>
+                     </li>
+                   </ul>
+                 </CardContent>
+               </Card>
+
+               {/* Career Perspectives */}
+               <Card className="shadow-md">
+                 <CardHeader>
+                   <CardTitle className="text-xl font-semibold text-primary">Perspectivas de Carrera</CardTitle>
+                 </CardHeader>
+                 <CardContent>
+                   <p className="text-sm text-muted-foreground mb-4">
+                     Nuestros egresados ocupan puestos importantes en diversas áreas, incluyendo:
+                   </p>
+                   <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                     <li>Psicología Clínica (Hospitales, Consultorios)</li>
+                     <li>Psicología Educativa (Colegios, Universidades)</li>
+                     <li>Psicología Organizacional (Empresas, Recursos Humanos)</li>
+                     <li>Psicología Social y Comunitaria (ONGs, Proyectos Sociales)</li>
+                     <li>Investigación y Docencia</li>
+                     <li>Neuropsicología</li>
+                   </ul>
+                    <Button variant="outline" size="sm" asChild className="mt-6 w-full">
+                      <Link href="/programs">Ver más oportunidades <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                    </Button>
+                 </CardContent>
+               </Card>
+             </div>
+           </div>
+        </div>
+      </section>
+
+
+      {/* Gallery Section */}
+      <section className="w-full py-16 md:py-24 lg:py-32 bg-secondary/50">
         <div className="container px-4 md:px-6">
           <header className="text-center mb-12 md:mb-16">
              <Camera className="h-12 w-12 mx-auto text-primary mb-4" />
@@ -136,8 +252,8 @@ export default function Home() {
                  <Image
                    src={`https://picsum.photos/seed/${img.seed}/400/400`}
                    alt={img.alt}
-                   layout="fill"
-                   objectFit="cover"
+                   fill // Use fill
+                   style={{ objectFit: 'cover' }} // Use style
                    className="transition-transform duration-500 group-hover:scale-105"
                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2">
@@ -178,8 +294,8 @@ export default function Home() {
                 <Image
                   src="https://picsum.photos/seed/platform/600/400"
                   alt="Plataforma PsycheConnect"
-                  layout="fill"
-                  objectFit="cover"
+                  fill // Use fill
+                  style={{ objectFit: 'cover' }} // Use style
                 />
               </div>
            </div>

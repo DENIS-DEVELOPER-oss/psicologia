@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -67,8 +68,8 @@ export default function NewsPage() {
                 <Image
                   src={item.imageUrl}
                   alt={`Imagen para ${item.title}`}
-                  layout="fill"
-                  objectFit="cover"
+                  fill // Use fill instead of layout
+                  style={{ objectFit: 'cover' }} // Use style for objectFit
                   className="transition-transform duration-500 group-hover:scale-105"
                 />
               </div>

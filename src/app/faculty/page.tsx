@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Mail, BookUser, Brain } from 'lucide-react';
@@ -58,13 +59,13 @@ export default function FacultyPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {facultyMembers.map((member) => (
-          <Card key={member.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col">
+          <Card key={member.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col group"> {/* Added group class */}
             <div className="relative w-full h-56 sm:h-64">
               <Image
                 src={member.imageUrl}
                 alt={`Foto de ${member.name}`}
-                layout="fill"
-                objectFit="cover"
+                fill // Use fill instead of layout
+                style={{ objectFit: 'cover' }} // Use style for objectFit
                 className="transition-transform duration-500 group-hover:scale-105"
               />
             </div>

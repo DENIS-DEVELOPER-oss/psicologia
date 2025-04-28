@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Building, History, Award, Target } from 'lucide-react';
@@ -53,8 +54,8 @@ export default function AboutPage() {
                  <Image
                     src="https://picsum.photos/seed/history/600/400"
                     alt="Hito histórico de la escuela"
-                    layout="fill"
-                    objectFit="cover"
+                    fill // Use fill instead of layout
+                    style={{ objectFit: 'cover' }} // Use style for objectFit
                     className="transition-transform duration-500 hover:scale-105"
                   />
                 </div>
