@@ -57,7 +57,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container py-12 md:py-16">
+      <div className="container mx-auto py-12 md:py-16 px-4 md:px-6"> {/* Added container and padding */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Column 1: About & Social */}
           <div className="space-y-4">
@@ -126,7 +126,7 @@ export default function Footer() {
             </ul>
             {/* Newsletter Form */}
             <form onSubmit={handleSubscribe} className="pt-4 space-y-2">
-               <div className="flex gap-2">
+               <div className="flex flex-col sm:flex-row gap-2"> {/* Stack on small screens */}
                 <Input
                   type="email"
                   placeholder="Tu correo electrónico"
@@ -136,15 +136,10 @@ export default function Footer() {
                   disabled={isSubmitting}
                   aria-label="Correo electrónico para suscribirse"
                 />
-                 <Button type="submit" disabled={isSubmitting} className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 shrink-0">
-                  {isSubmitting ? 'Enviando...' : <><Send className="h-4 w-4 mr-1 md:hidden" /> Suscribirse</>}
+                 <Button type="submit" disabled={isSubmitting} className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 shrink-0 w-full sm:w-auto"> {/* Full width on small screens */}
+                  {isSubmitting ? 'Enviando...' : <><Send className="h-4 w-4 mr-1 md:mr-2" /> <span className="hidden md:inline">Suscribirse</span><span className="md:hidden">Suscribir</span></>}
                 </Button>
               </div>
-               {/* {showSuccess && (
-                 <p className="text-xs text-green-300 flex items-center gap-1">
-                   <Mail className="h-3 w-3" /> ¡Gracias por suscribirte!
-                 </p>
-               )} */}
              </form>
           </div>
         </div>
@@ -152,14 +147,11 @@ export default function Footer() {
 
        {/* Bottom Bar */}
        <div className="bg-primary/90 py-4 mt-8"> {/* Slightly darker blue */}
-          <div className="container flex flex-col md:flex-row justify-between items-center text-center md:text-left text-xs text-primary-foreground/70">
+          <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left text-xs text-primary-foreground/70"> {/* Container and padding */}
             <p>© {currentYear} Escuela Profesional de Psicología. Todos los derechos reservados.</p>
-             <div className="flex items-center gap-4 mt-2 md:mt-0">
-               {/* <p>Desarrollado con <span role="img" aria-label="love">❤️</span> por Mi Equipo</p> */}
-               {/* Use a heart icon if preferred */}
-               {/* <p>Desarrollado con <Heart className="inline h-3 w-3 mx-1" /> por Mi Equipo</p> */}
+             <div className="flex items-center gap-2 sm:gap-4 mt-2 md:mt-0 flex-wrap justify-center"> {/* Wrap links on small screens */}
                 <Link href="#" className="hover:text-primary-foreground hover:underline">Política de Privacidad</Link>
-               <Separator orientation="vertical" className="h-4 bg-primary-foreground/50" />
+               <Separator orientation="vertical" className="h-4 bg-primary-foreground/50 hidden sm:block" /> {/* Hide separator on very small screens */}
                <Link href="#" className="hover:text-primary-foreground hover:underline">Términos y Condiciones</Link>
              </div>
            </div>
