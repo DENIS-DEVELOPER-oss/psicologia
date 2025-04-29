@@ -4,16 +4,29 @@ import * as React from 'react'; // Import React
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, Check, FlaskConical, Handshake, Globe, Lightbulb } from 'lucide-react';
+import { 
+  ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, 
+  Check, FlaskConical, Handshake, Globe, Lightbulb, ChevronLeft, 
+  ChevronRight, Download, Share2, InfoIcon 
+} from 'lucide-react';
 import { ImageLightbox } from '@/components/ui/image-lightbox';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay"; // Import Autoplay plugin
 import Image from 'next/image'; // Use regular Image for Carousel background
+import { Badge } from '@/components/ui/badge'; // Importamos Badge para el indicador "Evento reciente"
 
 export default function Home() {
    const plugin = React.useRef(
      Autoplay({ delay: 8000, stopOnInteraction: true }) // Autoplay every 8 seconds
    );
+   
+   // Estados para los carruseles de eventos
+   const [currentEventSlide, setCurrentEventSlide] = React.useState(0);
+   const eventImages = [
+     { src: '/images/fondo1.jpg', alt: 'Ceremonia de Bienvenida', count: '23/29' },
+     { src: '/images/portada.jpg', alt: 'Actividades de Integración', count: '18/30' },
+     { src: '/images/portada.jpeg', alt: 'Visita a laboratorios', count: '15/25' },
+   ];
 
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]"> {/* Adjust for header height */}
@@ -57,7 +70,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* El resto de tu código permanece completamente igual */}
+
+
       {/* Featured Sections */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-secondary/50">
         <div className="container mx-auto px-4 md:px-6"> {/* Added mx-auto */}
@@ -127,7 +141,83 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* NUEVA SECCIÓN: Eventos Recientes similar a la imagen proporcionada */}
+      <section className="w-full py-12">
+        <div className="container mx-auto px-4 md:px-6">
+          {/* Encabezado del evento con su badge */}
+          <div className="flex items-center border-l-4 border-primary pl-4 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-primary">Recepción de Cachimbos 2025-I</h2>
+            <Badge variant="outline" className="ml-4 bg-green-100 text-green-800 hover:bg-green-200">
+              Evento reciente
+            </Badge>
+          </div>
 
+          {/* Alerta con descripción */}
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded">
+            <div className="flex items-start">
+              <InfoIcon className="h-5 w-5 text-blue-500 mr-2 mt-0.5" />
+              <p className="text-blue-700">
+                Bienvenida a nuestros nuevos estudiantes del semestre 2025-I. Una nueva generación de futuros psicólogos inicia su formación profesional en nuestra Escuela.
+              </p>
+            </div>
+          </div>
+
+          {/* Galería de fotos */}
+          <div className="relative mb-6">
+            <div className="relative w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
+              {eventImages.map((image, index) => (
+                <div 
+                  key={index}
+                  className={`absolute inset-0 transition-opacity duration-500 ${index === currentEventSlide ? 'opacity-100' : 'opacity-0'}`}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    className="rounded-lg"
+                  />
+                  {/* Etiqueta de título y contador */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-3 flex justify-between items-center">
+                    <span className="font-medium">{image.alt}</span>
+                    <span className="text-sm bg-black/50 px-2 py-1 rounded">{image.count}</span>
+                  </div>
+                </div>
+              ))}
+              
+              {/* Etiqueta "Galería" */}
+              <div className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 rounded font-medium z-10">
+                Galería
+              </div>
+
+              {/* Botones de navegación */}
+              <button 
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 z-10"
+                onClick={() => setCurrentEventSlide((prev) => (prev === 0 ? eventImages.length - 1 : prev - 1))}
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <button 
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 z-10"
+                onClick={() => setCurrentEventSlide((prev) => (prev === eventImages.length - 1 ? 0 : prev + 1))}
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            </div>
+          </div>
+
+          {/* Botones de acciones */}
+          <div className="flex justify-center gap-4">
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Download className="mr-2 h-4 w-4" /> Descargar fotos
+            </Button>
+            <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+              <Share2 className="mr-2 h-4 w-4" /> Compartir
+            </Button>
+          </div>
+        </div>
+      </section>
+      {/* Resto del contenido permanece igual... */}
       {/* New Information Section (Inspired by Reference) */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-background">
         <div className="container mx-auto px-4 md:px-6"> {/* Added mx-auto */}
@@ -236,7 +326,6 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Gallery Section */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-secondary/50">
         <div className="container mx-auto px-4 md:px-6"> {/* Added mx-auto */}
@@ -278,46 +367,46 @@ export default function Home() {
         </div>
       </section>
 
-{/* Platform/Initiative Section */}
-<section className="w-full py-16 md:py-24 lg:py-32 bg-primary/5">
-  <div className="container mx-auto px-4 md:px-6">
-    <div className="grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <Rocket className="h-12 w-12 text-accent mb-4" />
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-primary mb-4">
-          Nuestra Iniciativa:
-        </h2>
-        <p className="text-muted-foreground leading-relaxed mb-6">
-          La Escuela Profesional de Psicología es un espacio académico comprometido con la formación integral de futuros psicólogos, promoviendo una educación centrada en la excelencia, la ética y la responsabilidad social. Desde el pregrado hasta la proyección profesional, trabajamos por una psicología al servicio del bienestar humano.
-        </p>
-        <p className="text-muted-foreground leading-relaxed mb-6">
-          Nuestro enfoque busca articular la teoría, la práctica y la investigación en el desarrollo de competencias clave para afrontar los desafíos del contexto actual.
-        </p>
-        <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-6">
-          <li>Acceso a bibliografía especializada y recursos académicos de vanguardia.</li>
-          <li>Foros de discusión, grupos de estudio y acompañamiento entre pares.</li>
-          <li>Oportunidades para prácticas profesionales y vínculos con el mercado laboral.</li>
-          <li>Agenda permanente de seminarios, talleres, congresos y actividades de extensión.</li>
-        </ul>
-        <Button asChild variant="outline" className="transition-transform hover:scale-105">
-          <Link href="#">
-            <span>Explorar Escuela Profesional <ArrowRight className="ml-2 h-4 w-4 inline" /></span>
-          </Link>
-        </Button>
-      </div>
-      <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
-        <ImageLightbox
-          src="/images/portada.jpg"
-          alt="Escuela Profesional de Psicología"
-          fill
-          style={{ objectFit: 'cover' }}
-          triggerClassName="w-full h-full"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      </div>
-    </div>
-  </div>
-</section>
+      {/* Platform/Initiative Section */}
+      <section className="w-full py-16 md:py-24 lg:py-32 bg-primary/5">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <Rocket className="h-12 w-12 text-accent mb-4" />
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-primary mb-4">
+                Nuestra Iniciativa:
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                La Escuela Profesional de Psicología es un espacio académico comprometido con la formación integral de futuros psicólogos, promoviendo una educación centrada en la excelencia, la ética y la responsabilidad social. Desde el pregrado hasta la proyección profesional, trabajamos por una psicología al servicio del bienestar humano.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Nuestro enfoque busca articular la teoría, la práctica y la investigación en el desarrollo de competencias clave para afrontar los desafíos del contexto actual.
+              </p>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-6">
+                <li>Acceso a bibliografía especializada y recursos académicos de vanguardia.</li>
+                <li>Foros de discusión, grupos de estudio y acompañamiento entre pares.</li>
+                <li>Oportunidades para prácticas profesionales y vínculos con el mercado laboral.</li>
+                <li>Agenda permanente de seminarios, talleres, congresos y actividades de extensión.</li>
+              </ul>
+              <Button asChild variant="outline" className="transition-transform hover:scale-105">
+                <Link href="#">
+                  <span>Explorar Escuela Profesional <ArrowRight className="ml-2 h-4 w-4 inline" /></span>
+                </Link>
+              </Button>
+            </div>
+            <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
+              <ImageLightbox
+                src="/images/portada.jpg"
+                alt="Escuela Profesional de Psicología"
+                fill
+                style={{ objectFit: 'cover' }}
+                triggerClassName="w-full h-full"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
 
        {/* Call to Action Section */}
