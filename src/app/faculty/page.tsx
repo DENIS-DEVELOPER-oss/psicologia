@@ -108,7 +108,7 @@ export default function FacultyPage() {
   });
 
   return (
-    <div className="container px-4 md:px-6 py-16 md:py-24 lg:py-32"> {/* Added px-4 md:px-6 */}
+    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 lg:py-32"> {/* Added mx-auto */}
       <header className="text-center mb-12 md:mb-16">
          <Users className="h-16 w-16 mx-auto text-primary mb-4" />
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl text-primary">

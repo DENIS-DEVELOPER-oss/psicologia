@@ -127,7 +127,7 @@ export default function DegreesPage() {
 
 
   return (
-    <div className="container px-4 md:px-6 py-12 md:py-16 lg:py-20"> {/* Added px-4 md:px-6 */}
+    <div className="container mx-auto px-4 md:px-6 py-12 md:py-16 lg:py-20"> {/* Added mx-auto */}
       <header className="mb-8 md:mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center gap-3">
