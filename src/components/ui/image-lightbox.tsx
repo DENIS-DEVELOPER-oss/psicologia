@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import Image, { type ImageProps } from 'next/image';
-import { Dialog, DialogContent, DialogTrigger, DialogClose } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogClose, DialogTitle } from '@/components/ui/dialog'; // Added DialogTitle
 import { Button } from '@/components/ui/button';
 import { Maximize, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -57,10 +57,12 @@ export function ImageLightbox({
         </div>
       </DialogTrigger>
       <DialogContent className="max-w-[90vw] md:max-w-[80vw] lg:max-w-[70vw] xl:max-w-[60vw] p-2 sm:p-4 bg-background/90 border-none shadow-2xl rounded-lg">
+         {/* Add visually hidden DialogTitle for accessibility */}
+         <DialogTitle className="sr-only">{alt}</DialogTitle>
         <div className="relative w-full" style={{ aspectRatio: `${aspectRatio}` }}>
           <Image
             src={src}
-            alt={alt}
+            alt={alt} // Keep alt for screen readers within the image itself too
             fill
             style={{ objectFit: 'contain' }} // Use contain to show the full image without cropping
             className="rounded"
@@ -68,9 +70,7 @@ export function ImageLightbox({
             quality={quality ?? 85} // Slightly higher quality for lightbox
           />
         </div>
-        {/* Optional: Add caption or description here */}
-        {/* <p className="text-center text-sm text-muted-foreground mt-2">{alt}</p> */}
-         <DialogClose asChild className="absolute top-2 right-2">
+         <DialogClose asChild className="absolute top-2 right-2 z-10"> {/* Ensure close is above image */}
             <Button variant="ghost" size="icon" className="rounded-full bg-background/50 hover:bg-background/80">
                 <X className="h-4 w-4 text-foreground" />
                 <span className="sr-only">Cerrar</span>
@@ -80,4 +80,3 @@ export function ImageLightbox({
     </Dialog>
   );
 }
-
