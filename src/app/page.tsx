@@ -344,61 +344,6 @@ export default function Home() {
          </div>
        </section>
 
-      {/* Location Section */}
-      <section className="w-full py-16 md:py-24 lg:py-32 bg-background">
-        <div className="container mx-auto px-4 md:px-6"> {/* Added mx-auto */}
-          <header className="text-center mb-12 md:mb-16">
-             <MapPin className="h-12 w-12 mx-auto text-primary mb-4" />
-             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-primary">
-               Encuéntranos
-             </h2>
-             <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-               Visita nuestras modernas instalaciones ubicadas en el corazón de la ciudad.
-             </p>
-           </header>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            {/* Map Placeholder */}
-            <div className="aspect-video rounded-lg overflow-hidden bg-muted flex items-center justify-center text-muted-foreground shadow-md">
-              {/* Keep Map Placeholder non-interactive */}
-              <MapPin className="h-16 w-16 opacity-50" />
-              <span className="ml-4 text-xl">Mapa Próximamente</span>
-              {/* <ImageLightbox
-                src="https://picsum.photos/seed/map/800/450" // Replace with static map image if needed
-                alt="Mapa de ubicación de la escuela"
-                fill
-                style={{ objectFit: 'cover' }}
-                triggerClassName="w-full h-full"
-              /> */}
-            </div>
-            {/* Address and Info */}
-            <div className="space-y-4">
-               <h3 className="text-2xl font-semibold text-primary">Nuestra Ubicación</h3>
-               <p className="text-muted-foreground">
-                 [Dirección Completa de la Escuela], <br />
-                 [Piso/Oficina - Opcional], <br />
-                 [Ciudad], [Código Postal], [País] <br />
-                 (Placeholder: Reemplazar con dirección real)
-               </p>
-               <p className="text-muted-foreground">
-                  Contamos con fácil acceso mediante transporte público y estacionamiento cercano.
-               </p>
-               <div className="flex gap-4 pt-4">
-                 <Button asChild>
-                   <Link href="/contact">
-                     <span>Contactar <ArrowRight className="ml-2 h-4 w-4 inline" /></span>
-                   </Link>
-                 </Button>
-                 <Button variant="outline" asChild>
-                   <Link href="https://maps.google.com/?q=Placeholder+Address" target="_blank" rel="noopener noreferrer">
-                     Ver en Mapa (Externo)
-                   </Link>
-                 </Button>
-               </div>
-             </div>
-           </div>
-         </div>
-       </section>
-
        {/* Call to Action Section */}
       <section className="w-full py-16 md:py-24 bg-secondary/50">
         <div className="container mx-auto text-center px-4 md:px-6"> {/* Added mx-auto */}
