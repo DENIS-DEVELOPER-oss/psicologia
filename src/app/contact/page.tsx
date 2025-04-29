@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,65 +36,71 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 export default function ContactPage() {
   const { toast } = useToast();
-  
-  const [action, setAction] = useState<string | null>(null);
-  const [program, setProgram] = useState<string | null>(null);
-  
+  const [isSubmitting, setIsSubmitting] = useState(false); // Added state for submission status
+
+  // Get search params for pre-filling the form
+  const [searchParams, setSearchParams] = useState<URLSearchParams | null>(null);
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    setAction(urlParams.get("action"));
-    setProgram(urlParams.get("program"));
+      if (typeof window !== 'undefined') {
+          setSearchParams(new URLSearchParams(window.location.search));
+      }
   }, []);
+
+  const action = searchParams?.get("action");
+  const program = searchParams?.get("program");
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: "",
       email: "",
-      subject: "",
-      inquiryType: "general",
-      message: "",
+      subject: action === 'apply' ? 'Solicitud de Admisión' : '',
+      inquiryType: action === 'apply' ? 'admission' : 'general',
+      message: action === 'apply' ? `Estoy interesado/a en aplicar al programa: ${program || 'Indicar programa'}. Por favor, envíenme más información sobre el proceso de admisión.` : '',
     },
   });
 
+   // Update form if params change after initial load
   useEffect(() => {
-    if(action || program){
-      const defaultSubject = action === 'apply' ? 'Solicitud de Admisión' : '';
-      const defaultInquiryType = action === 'apply' ? 'admission' : 'general';
-      const defaultMessage = action === 'apply' ? `Estoy interesado/a en aplicar al programa: ${program || 'Indicar programa'}. Por favor, envíenme más información sobre el proceso de admisión.` : '';
-      form.reset({
-        subject: defaultSubject,
-        inquiryType: defaultInquiryType,
-        message: defaultMessage
-      });
+    if (searchParams) { // Ensure searchParams is loaded
+        const currentAction = searchParams.get("action");
+        const currentProgram = searchParams.get("program");
+        const defaultSubject = currentAction === 'apply' ? 'Solicitud de Admisión' : '';
+        const defaultInquiryType = currentAction === 'apply' ? 'admission' : 'general';
+        const defaultMessage = currentAction === 'apply' ? `Estoy interesado/a en aplicar al programa: ${currentProgram || 'Indicar programa'}. Por favor, envíenme más información sobre el proceso de admisión.` : '';
+
+        // Only reset if the values are still the initial defaults or empty
+        if (!form.getValues('subject') || form.getValues('subject') === 'Solicitud de Admisión') {
+            form.setValue('subject', defaultSubject);
+        }
+         if (form.getValues('inquiryType') === 'general' || form.getValues('inquiryType') === 'admission') {
+             form.setValue('inquiryType', defaultInquiryType as "general" | "admission" | "program" | "faculty" | "other"); // Ensure type safety
+         }
+         if (!form.getValues('message') || form.getValues('message').startsWith('Estoy interesado/a')) {
+           form.setValue('message', defaultMessage);
+         }
     }
-  }, [action, program, form]);
-
-   useEffect(() => {
-    // Update default values if search params change after initial load
-    const defaultSubject = action === 'apply' ? 'Solicitud de Admisión' : '';
-    const defaultInquiryType = action === 'apply' ? 'admission' : 'general';
-    const defaultMessage = action === 'apply' ? `Estoy interesado/a en aplicar al programa: ${program || 'Indicar programa'}. Por favor, envíenme más información sobre el proceso de admisión.` : '';
-
-    form.reset({
-       ...form.getValues(), // Keep existing values if user already typed something
-       subject: form.getValues('subject') || defaultSubject,
-       inquiryType: form.getValues('inquiryType') || defaultInquiryType,
-       message: form.getValues('message') || defaultMessage,
-     });
-   }, [form]);
+   }, [searchParams, form]);
 
 
   async function onSubmit(data: ContactFormValues) {
+    setIsSubmitting(true); // Set submitting state
     // Simulate form submission
     console.log("Form data:", data);
-     await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+     await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
 
     toast({
       title: "Mensaje Enviado",
       description: "Gracias por contactarnos. Nos pondremos en contacto contigo pronto.",
     });
-    form.reset(); // Reset form after successful submission
+    form.reset({ // Reset form to initial defaults after successful submission
+      name: "",
+      email: "",
+      subject: action === 'apply' ? 'Solicitud de Admisión' : '',
+      inquiryType: action === 'apply' ? 'admission' : 'general',
+      message: action === 'apply' ? `Estoy interesado/a en aplicar al programa: ${program || 'Indicar programa'}. Por favor, envíenme más información sobre el proceso de admisión.` : '',
+    });
+    setIsSubmitting(false); // Reset submitting state
   }
 
   return (
@@ -149,7 +156,7 @@ export default function ContactPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Tipo de Consulta</FormLabel>
-                       <Select onValueChange={field.onChange} defaultValue={field.value}>
+                       <Select onValueChange={field.onChange} value={field.value}> {/* Controlled component */}
                          <FormControl>
                            <SelectTrigger>
                              <SelectValue placeholder="Selecciona un tipo" />
@@ -200,8 +207,8 @@ export default function ContactPage() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full md:w-auto" disabled={form.formState.isSubmitting}>
-                  {form.formState.isSubmitting ? "Enviando..." : <>Enviar Mensaje <Send className="ml-2 h-4 w-4" /></>}
+                <Button type="submit" className="w-full md:w-auto" disabled={isSubmitting}>
+                  {isSubmitting ? "Enviando..." : <>Enviar Mensaje <Send className="ml-2 h-4 w-4" /></>}
                 </Button>
               </form>
             </Form>
@@ -215,8 +222,8 @@ export default function ContactPage() {
               <CardTitle className="text-2xl font-semibold text-primary">Información de Contacto</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center gap-4">
-                <MapPin className="h-6 w-6 text-accent" />
+              <div className="flex items-start gap-4"> {/* Changed items-center to items-start */}
+                <MapPin className="h-6 w-6 text-accent mt-1 shrink-0" /> {/* Added mt-1 */}
                 <div>
                   <h3 className="font-medium">Dirección</h3>
                   <p className="text-muted-foreground">
@@ -246,13 +253,12 @@ export default function ContactPage() {
              </CardContent>
            </Card>
 
-            {/* Optional: Map Section */}
+          {/* Map Section */}
           <Card className="shadow-lg overflow-hidden">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold text-primary">Nuestra Ubicación</CardTitle>
             </CardHeader>
              <CardContent className="p-0">
-               {/* Replace with an actual map embed or image */}
                <div className="aspect-video bg-muted flex items-center justify-center text-muted-foreground">
                  {/* Placeholder for map */}
                   <MapPin className="h-12 w-12 opacity-50" />
@@ -261,7 +267,7 @@ export default function ContactPage() {
                   {/* <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d..."
                     width="100%"
-                    height="300"
+                    height="300" // Adjusted height
                     style={{ border:0 }}
                     allowFullScreen={true}
                     loading="lazy"

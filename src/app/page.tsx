@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, Library, Building, Network, Check, FlaskConical, Handshake, Globe, Briefcase } from 'lucide-react';
+import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, Check, FlaskConical, Handshake, Globe } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -245,6 +245,12 @@ export default function Home() {
                </div>
              ))}
            </div>
+           {/* Add a button to link to a full gallery page if needed */}
+           {/* <div className="mt-12 text-center">
+             <Button variant="outline" asChild>
+               <Link href="/gallery">Ver Galería Completa <ArrowRight className="ml-2 h-4 w-4" /></Link>
+             </Button>
+           </div> */}
         </div>
       </section>
 
@@ -362,5 +368,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
