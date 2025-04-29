@@ -1,4 +1,4 @@
-'use client'; // Add this directive if using client-side hooks like useState or useEffect in Header/Footer if needed, or if styled-jsx is implicitly used.
+'use client'; // Keep this if Header or Footer uses client hooks
 
 import type { Metadata } from 'next';
 import './globals.css';
@@ -6,15 +6,10 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
 
-// Metadata definition should ideally be static or generated via generateMetadata
-// If dynamic metadata is needed based on client-side state, reconsider approach.
+// Static metadata can be defined here. For dynamic, use generateMetadata.
 // export const metadata: Metadata = {
 //   title: 'PsycheSite - Escuela Profesional de Psicología',
 //   description: 'Sitio web oficial de la Escuela Profesional de Psicología.',
-//   icons: {
-//     // Consider adding a favicon later if needed
-//     // icon: "/favicon.ico",
-//   },
 // };
 
 export default function RootLayout({
@@ -25,13 +20,16 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* Metadata can be placed here directly or generated */}
+        {/* You can place static meta tags directly here */}
         <title>PsycheSite - Escuela Profesional de Psicología</title>
         <meta name="description" content="Sitio web oficial de la Escuela Profesional de Psicología." />
-        {/* Add favicon link here if available */}
+        {/* Add favicon link here if/when available */}
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </head>
-      <body className="flex min-h-screen flex-col antialiased">
+      {/* Apply flex column layout to body to push footer down */}
+      <body className="flex flex-col min-h-screen antialiased">
         <Header />
+        {/* Make the main content area grow to fill available space */}
         <main className="flex-grow">{children}</main>
         <Footer />
         <Toaster />
