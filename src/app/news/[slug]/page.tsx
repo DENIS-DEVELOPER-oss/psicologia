@@ -109,7 +109,7 @@ export default async function NewsDetailPage() {
     // Handle case where news item is not found
     // You could redirect to a 404 page or show a message
      return (
-       <div className="container py-16 md:py-24 lg:py-32 px-4 md:px-6 text-center">
+       <div className="container py-16 md:py-24 lg:py-32 text-center"> {/* Removed px-4 md:px-6 */}
          <h1 className="text-3xl font-bold text-destructive mb-4">Noticia no encontrada</h1>
          <p className="text-muted-foreground mb-6">Lo sentimos, la noticia que buscas no existe o ha sido movida.</p>
           <Button asChild variant="outline">
@@ -122,7 +122,7 @@ export default async function NewsDetailPage() {
   }
 
   return (
-    <div className="container py-16 md:py-24 lg:py-32 px-4 md:px-6 max-w-4xl mx-auto">
+    <div className="container py-16 md:py-24 lg:py-32 max-w-4xl mx-auto"> {/* Removed px-4 md:px-6 */}
        <Button asChild variant="outline" className="mb-8">
          <Link href="/news">
            <span><ArrowLeft className="mr-2 h-4 w-4 inline" /> Volver a Noticias</span>

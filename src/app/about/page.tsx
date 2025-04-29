@@ -8,7 +8,7 @@ import { ImageLightbox } from '@/components/ui/image-lightbox'; // Import the ne
 
 export default function AboutPage() {
   return (
-    <div className="container py-16 md:py-24 lg:py-32 px-4 md:px-6">
+    <div className="container py-16 md:py-24 lg:py-32"> {/* Removed px-4 md:px-6 */}
       <div className="max-w-4xl mx-auto">
         <header className="text-center mb-12 md:mb-16">
           <Building className="h-16 w-16 mx-auto text-primary mb-4" />
