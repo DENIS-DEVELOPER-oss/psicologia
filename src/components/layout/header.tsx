@@ -28,9 +28,12 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm transition-shadow duration-300 hover:shadow-md">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group" onClick={() => setIsOpen(false)}>
-          <GraduationCap className="h-7 w-7 text-primary transition-transform duration-300 group-hover:rotate-[-15deg]" />
-          <span className="font-bold text-lg text-primary transition-colors duration-300 group-hover:text-primary/80">PsycheSite</span>
-        </Link>
+          <div className="flex items-center gap-3">
+          <img src="/images/logo.png" alt="Logo Psicología" className="h-10 w-auto ml-[50px]" />
+          <span className="font-bold text-lg text-primary transition-colors duration-300 group-hover:text-primary/80">
+    Escuela Profesional de Psicología
+  </span>
+</div>        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-4 text-sm font-medium"> {/* Reduced space-x */}

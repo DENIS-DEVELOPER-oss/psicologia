@@ -1,4 +1,3 @@
-
 'use client'; // Required for Carousel and Autoplay plugin
 
 import * as React from 'react'; // Import React
@@ -11,14 +10,6 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import Autoplay from "embla-carousel-autoplay"; // Import Autoplay plugin
 import Image from 'next/image'; // Use regular Image for Carousel background
 
-// Define Hero Images
-const heroImages = [
-  { seed: 'psychology-hero-1', alt: 'Escuela Profesional de Psicología Fondo 1' },
-  { seed: 'psychology-hero-2', alt: 'Escuela Profesional de Psicología Fondo 2' },
-  { seed: 'psychology-hero-3', alt: 'Escuela Profesional de Psicología Fondo 3' },
-];
-
-
 export default function Home() {
    const plugin = React.useRef(
      Autoplay({ delay: 8000, stopOnInteraction: true }) // Autoplay every 8 seconds
@@ -26,44 +17,25 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]"> {/* Adjust for header height */}
-      {/* Hero Section with Carousel */}
+      {/* Hero Section with Background Image - Solución simplificada */}
       <section className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] flex items-center justify-center text-center overflow-hidden">
+        {/* Fondo de imagen fijo en lugar del carrusel */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/portada.jpeg"
+            alt="Escuela Profesional de Psicología"
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
+            quality={80}
+          />
+        </div>
 
-        <Carousel
-          plugins={[plugin.current]}
-          className="absolute inset-0 w-full h-full z-0"
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.reset}
-          opts={{
-            loop: true,
-          }}
-        >
-          <CarouselContent className="m-0 h-full">
-            {heroImages.map((img, index) => (
-              <CarouselItem key={index} className="p-0 relative h-full">
-                 {/* Use regular Image for carousel background - lightbox trigger removed */}
-                <Image
-                  src={`https://picsum.photos/seed/${img.seed}/1920/1080`}
-                  alt={img.alt}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  className="transition-opacity duration-1000 ease-in-out" // Add fade transition if needed, Carousel handles slide
-                  priority={index === 0} // Load first image quickly
-                  quality={75}
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          {/* Optional: Add Previous/Next buttons */}
-          {/* <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-background/50 hover:bg-background/80 text-foreground" /> */}
-          {/* <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-background/50 hover:bg-background/80 text-foreground" /> */}
-        </Carousel>
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50 z-10"></div> {/* Dark overlay */}
+        {/* Overlay para mejorar legibilidad */}
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
 
         {/* Content Box */}
-        <div className="container mx-auto px-4 md:px-6 relative z-20 max-w-3xl bg-black/30 backdrop-blur-sm p-8 rounded-lg shadow-xl"> {/* Added mx-auto */}
+        <div className="container mx-auto px-4 md:px-6 relative z-20 max-w-3xl bg-black/30 backdrop-blur-sm p-8 rounded-lg shadow-xl">
           <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-white mb-4 animate-fade-in-up">
             Explora el Mundo de la Psicología
           </h1>
@@ -85,6 +57,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* El resto de tu código permanece completamente igual */}
       {/* Featured Sections */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-secondary/50">
         <div className="container mx-auto px-4 md:px-6"> {/* Added mx-auto */}
@@ -170,7 +143,7 @@ export default function Home() {
                    <div className="md:col-span-1 relative h-48 md:h-full rounded-md overflow-hidden">
                      {/* Replace Image with ImageLightbox */}
                      <ImageLightbox
-                       src="https://picsum.photos/seed/director/300/400"
+                       src="/images/autoridad.png"
                        alt="Foto del Director/a - Placeholder"
                        fill
                        style={{ objectFit: "cover", objectPosition: "top" }}
@@ -290,7 +263,7 @@ export default function Home() {
                <div key={index} className="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
                  {/* Replace Image with ImageLightbox */}
                  <ImageLightbox
-                   src={`https://picsum.photos/seed/${img.seed}/400/400`}
+                   src={`/images/portada1.jpg`}
                    alt={img.alt}
                    fill
                    style={{ objectFit: 'cover' }}
@@ -305,44 +278,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Platform/Initiative Section */}
-      <section className="w-full py-16 md:py-24 lg:py-32 bg-primary/5">
-        <div className="container mx-auto px-4 md:px-6"> {/* Added mx-auto */}
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <Rocket className="h-12 w-12 text-accent mb-4" />
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-primary mb-4">
-                Nuestra Iniciativa: PsycheConnect
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                PsycheConnect es nuestra plataforma digital innovadora diseñada para fomentar la colaboración entre estudiantes, docentes e investigadores. Facilita el acceso a recursos académicos, la participación en proyectos de investigación y la conexión con oportunidades profesionales en el campo de la psicología.
-              </p>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-6">
-                 <li>Acceso a biblioteca digital y bases de datos especializadas.</li>
-                 <li>Foros de discusión y grupos de estudio temáticos.</li>
-                 <li>Bolsa de trabajo y prácticas profesionales.</li>
-                 <li>Calendario de eventos y seminarios exclusivos.</li>
-               </ul>
-              <Button asChild variant="outline" className="transition-transform hover:scale-105">
-                 <Link href="#">
-                   <span>Explorar PsycheConnect <ArrowRight className="ml-2 h-4 w-4 inline" /></span>
-                 </Link>
-               </Button>
-             </div>
-             <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
-                {/* Replace Image with ImageLightbox */}
-                <ImageLightbox
-                  src="https://picsum.photos/seed/platform/600/400"
-                  alt="Plataforma PsycheConnect"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  triggerClassName="w-full h-full"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-           </div>
-         </div>
-       </section>
+{/* Platform/Initiative Section */}
+<section className="w-full py-16 md:py-24 lg:py-32 bg-primary/5">
+  <div className="container mx-auto px-4 md:px-6">
+    <div className="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <Rocket className="h-12 w-12 text-accent mb-4" />
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-primary mb-4">
+          Nuestra Iniciativa:
+        </h2>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          La Escuela Profesional de Psicología es un espacio académico comprometido con la formación integral de futuros psicólogos, promoviendo una educación centrada en la excelencia, la ética y la responsabilidad social. Desde el pregrado hasta la proyección profesional, trabajamos por una psicología al servicio del bienestar humano.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Nuestro enfoque busca articular la teoría, la práctica y la investigación en el desarrollo de competencias clave para afrontar los desafíos del contexto actual.
+        </p>
+        <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-6">
+          <li>Acceso a bibliografía especializada y recursos académicos de vanguardia.</li>
+          <li>Foros de discusión, grupos de estudio y acompañamiento entre pares.</li>
+          <li>Oportunidades para prácticas profesionales y vínculos con el mercado laboral.</li>
+          <li>Agenda permanente de seminarios, talleres, congresos y actividades de extensión.</li>
+        </ul>
+        <Button asChild variant="outline" className="transition-transform hover:scale-105">
+          <Link href="#">
+            <span>Explorar Escuela Profesional <ArrowRight className="ml-2 h-4 w-4 inline" /></span>
+          </Link>
+        </Button>
+      </div>
+      <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
+        <ImageLightbox
+          src="/images/portada.jpg"
+          alt="Escuela Profesional de Psicología"
+          fill
+          style={{ objectFit: 'cover' }}
+          triggerClassName="w-full h-full"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
 
        {/* Call to Action Section */}
       <section className="w-full py-16 md:py-24 bg-secondary/50">

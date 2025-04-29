@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="es">
       <head>
         {/* You can place static meta tags directly here */}
-        <title>PsycheSite - Escuela Profesional de Psicología</title>
+        <title>Escuela Profesional de Psicología</title>
         <meta name="description" content="Sitio web oficial de la Escuela Profesional de Psicología." />
         {/* Add favicon link here if/when available */}
         {/* <link rel="icon" href="/favicon.ico" /> */}
