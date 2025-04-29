@@ -32,15 +32,15 @@ const researchers = [
   // Add more researchers
 ];
 
-// Data for the colored grid cards
+// Data for the colored grid cards with updated links
 const serviceCards = [
-  { title: 'Líneas de Investigación', icon: Target, color: 'bg-blue-500 hover:bg-blue-600', href: '#research-lines' }, // Blue
-  { title: 'Ambientes Académicos', icon: Library, color: 'bg-green-500 hover:bg-green-600', href: '#' }, // Green
-  { title: 'Investigadores', icon: Users, color: 'bg-yellow-500 hover:bg-yellow-600', href: '#researchers' }, // Yellow
-  { title: 'Publicaciones', icon: FileText, color: 'bg-red-500 hover:bg-red-600', href: '#' }, // Red
-  { title: 'Repositorio de Tesis', icon: GraduationCap, color: 'bg-purple-500 hover:bg-purple-600', href: '#' }, // Purple
-  { title: 'Laboratorios y Gabinetes', icon: FlaskConical, color: 'bg-indigo-500 hover:bg-indigo-600', href: '#' }, // Indigo/Blueish-Purple
-  { title: 'Campus Virtual', icon: Laptop, color: 'bg-pink-500 hover:bg-pink-600', href: '#' }, // Pink
+  { title: 'Líneas de Investigación', icon: Target, color: 'bg-blue-500 hover:bg-blue-600', href: '#research-lines', external: false }, // Internal anchor
+  { title: 'Ambientes Académicos', icon: Library, color: 'bg-green-500 hover:bg-green-600', href: 'https://www.portal.unap.edu.pe/', external: true }, // External link
+  { title: 'Investigadores', icon: Users, color: 'bg-yellow-500 hover:bg-yellow-600', href: '#researchers', external: false }, // Internal anchor
+  { title: 'Publicaciones', icon: FileText, color: 'bg-red-500 hover:bg-red-600', href: 'https://biblioteca.concytec.gob.pe/', external: true }, // External link
+  { title: 'Repositorio de Tesis', icon: GraduationCap, color: 'bg-purple-500 hover:bg-purple-600', href: 'https://repositorio.unap.edu.pe/', external: true }, // External link
+  { title: 'Laboratorios y Gabinetes', icon: FlaskConical, color: 'bg-indigo-500 hover:bg-indigo-600', href: '#', external: false }, // Placeholder internal/no link
+  { title: 'Campus Virtual', icon: Laptop, color: 'bg-pink-500 hover:bg-pink-600', href: 'https://aulavirtual2.unap.edu.pe/login?ReturnUrl=%2F', external: true }, // External link
 ];
 
 // Placeholder data for research lines
@@ -146,7 +146,13 @@ export default function ResearchPage() {
       <section className="mb-16 md:mb-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {serviceCards.map((card, index) => (
-             <Link key={index} href={card.href} className="block group">
+             <Link
+                key={index}
+                href={card.href}
+                className="block group"
+                target={card.external ? "_blank" : undefined}
+                rel={card.external ? "noopener noreferrer" : undefined}
+              >
                 {/* Using inline styles for specific background colors from the image */}
                 <Card className={cn("text-center text-white p-6 h-32 flex flex-col justify-center items-center rounded-lg shadow-md transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-xl", card.color)}>
                   <card.icon className="h-8 w-8 mb-2" />
@@ -219,3 +225,4 @@ export default function ResearchPage() {
     </div>
   );
 }
+
