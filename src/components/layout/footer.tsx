@@ -57,7 +57,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto py-12 md:py-16 px-4 md:px-6"> {/* Added container and padding */}
+      {/* Rely on container's default padding, removed px-4 md:px-6 */}
+      <div className="container mx-auto py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Column 1: About & Social */}
           <div className="space-y-4">
@@ -147,7 +148,8 @@ export default function Footer() {
 
        {/* Bottom Bar */}
        <div className="bg-primary/90 py-4 mt-8"> {/* Slightly darker blue */}
-          <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left text-xs text-primary-foreground/70"> {/* Container and padding */}
+          {/* Rely on container's default padding, removed px-4 md:px-6 */}
+          <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left text-xs text-primary-foreground/70">
             <p>© {currentYear} Escuela Profesional de Psicología. Todos los derechos reservados.</p>
              <div className="flex items-center gap-2 sm:gap-4 mt-2 md:mt-0 flex-wrap justify-center"> {/* Wrap links on small screens */}
                 <Link href="#" className="hover:text-primary-foreground hover:underline">Política de Privacidad</Link>
