@@ -1,27 +1,64 @@
 
+'use client'; // Required for Carousel and Autoplay plugin
+
+import * as React from 'react'; // Import React
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, Check, FlaskConical, Handshake, Globe, Lightbulb } from 'lucide-react';
-import { ImageLightbox } from '@/components/ui/image-lightbox'; // Import the new component
+import { ImageLightbox } from '@/components/ui/image-lightbox';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay"; // Import Autoplay plugin
+import Image from 'next/image'; // Use regular Image for Carousel background
+
+// Define Hero Images
+const heroImages = [
+  { seed: 'psychology-hero-1', alt: 'Escuela Profesional de Psicología Fondo 1' },
+  { seed: 'psychology-hero-2', alt: 'Escuela Profesional de Psicología Fondo 2' },
+  { seed: 'psychology-hero-3', alt: 'Escuela Profesional de Psicología Fondo 3' },
+];
+
 
 export default function Home() {
+   const plugin = React.useRef(
+     Autoplay({ delay: 8000, stopOnInteraction: true }) // Autoplay every 8 seconds
+   );
+
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]"> {/* Adjust for header height */}
-      {/* Hero Section */}
-      <section className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] flex items-center justify-center text-center">
-        {/* Background Image - Not making this clickable/expandable */}
-        <ImageLightbox
-          src="https://picsum.photos/seed/psychology-hero/1920/1080" // Replace with a relevant high-quality image
-          alt="Escuela Profesional de Psicología Fondo"
-          fill
-          style={{ objectFit: 'cover' }}
-          className="absolute inset-0 z-0"
-          priority // Load image quickly
-          quality={75}
-          triggerWrapperClassName="cursor-default" // Disable zoom cursor for background
-          triggerClassName="pointer-events-none" // Make background image non-interactive for lightbox
-        />
+      {/* Hero Section with Carousel */}
+      <section className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] flex items-center justify-center text-center overflow-hidden">
+
+        <Carousel
+          plugins={[plugin.current]}
+          className="absolute inset-0 w-full h-full z-0"
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
+          opts={{
+            loop: true,
+          }}
+        >
+          <CarouselContent className="m-0 h-full">
+            {heroImages.map((img, index) => (
+              <CarouselItem key={index} className="p-0 relative h-full">
+                 {/* Use regular Image for carousel background - lightbox trigger removed */}
+                <Image
+                  src={`https://picsum.photos/seed/${img.seed}/1920/1080`}
+                  alt={img.alt}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  className="transition-opacity duration-1000 ease-in-out" // Add fade transition if needed, Carousel handles slide
+                  priority={index === 0} // Load first image quickly
+                  quality={75}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          {/* Optional: Add Previous/Next buttons */}
+          {/* <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-background/50 hover:bg-background/80 text-foreground" /> */}
+          {/* <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-background/50 hover:bg-background/80 text-foreground" /> */}
+        </Carousel>
+
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/50 z-10"></div> {/* Dark overlay */}
 
@@ -130,7 +167,7 @@ export default function Home() {
                    <CardTitle className="text-2xl font-semibold text-primary">Mensaje del Director</CardTitle>
                  </CardHeader>
                  <CardContent className="grid md:grid-cols-3 gap-6">
-                   <div className="md:col-span-1 h-48 md:h-full rounded-md overflow-hidden">
+                   <div className="md:col-span-1 relative h-48 md:h-full rounded-md overflow-hidden">
                      {/* Replace Image with ImageLightbox */}
                      <ImageLightbox
                        src="https://picsum.photos/seed/director/300/400"
@@ -292,7 +329,7 @@ export default function Home() {
                  </Link>
                </Button>
              </div>
-             <div className="h-80 rounded-lg overflow-hidden shadow-lg">
+             <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
                 {/* Replace Image with ImageLightbox */}
                 <ImageLightbox
                   src="https://picsum.photos/seed/platform/600/400"
