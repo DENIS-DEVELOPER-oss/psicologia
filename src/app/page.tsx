@@ -33,7 +33,7 @@ export default function Home() {
           <div className="flex flex-col gap-4 sm:flex-row justify-center animate-fade-in-up animation-delay-400">
             <Button size="lg" asChild className="transition-transform hover:scale-105 bg-primary hover:bg-primary/90 text-primary-foreground">
               <Link href="/programs">
-                Ver Programas <ArrowRight className="ml-2 h-5 w-5" />
+                Ver Programas <ArrowRight className="ml-2 h-5 w-5 inline" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild className="transition-transform hover:scale-105 border-white text-white hover:bg-white/10 hover:text-white">
@@ -63,7 +63,7 @@ export default function Home() {
               </CardContent>
               <CardFooter>
                  <Button variant="link" asChild className="p-0 h-auto">
-                    <Link href="/about">Leer Más <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                    <Link href="/about">Leer Más <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
                  </Button>
               </CardFooter>
             </Card>
@@ -82,7 +82,7 @@ export default function Home() {
               </CardContent>
               <CardFooter>
                  <Button variant="link" asChild className="p-0 h-auto">
-                    <Link href="/programs">Ver Detalles <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                    <Link href="/programs">Ver Detalles <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
                  </Button>
               </CardFooter>
             </Card>
@@ -101,7 +101,7 @@ export default function Home() {
               </CardContent>
               <CardFooter>
                  <Button variant="link" asChild className="p-0 h-auto">
-                    <Link href="/news">Ver Noticias <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                    <Link href="/news">Ver Noticias <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
                  </Button>
               </CardFooter>
             </Card>
@@ -139,7 +139,7 @@ export default function Home() {
                        <br /><em>- [Nombre del Director/a - Placeholder]</em>
                      </p>
                      <Button variant="link" asChild className="p-0 h-auto">
-                       <Link href="/about">Leer más <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                       <Link href="/about">Leer más <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
                      </Button>
                    </div>
                  </CardContent>
@@ -201,7 +201,7 @@ export default function Home() {
                      <li>Neuropsicología</li>
                    </ul>
                     <Button variant="outline" size="sm" asChild className="mt-6 w-full">
-                      <Link href="/programs">Ver más oportunidades <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                      <Link href="/programs">Ver más oportunidades <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
                     </Button>
                  </CardContent>
                </Card>
@@ -271,7 +271,7 @@ export default function Home() {
                </ul>
               <Button asChild variant="outline" className="transition-transform hover:scale-105">
                  <Link href="#">
-                   Explorar PsycheConnect <ArrowRight className="ml-2 h-4 w-4" />
+                   Explorar PsycheConnect <ArrowRight className="ml-2 h-4 w-4 inline" />
                  </Link>
                </Button>
              </div>
@@ -320,7 +320,7 @@ export default function Home() {
                <div className="flex gap-4 pt-4">
                  <Button asChild>
                    <Link href="/contact">
-                     Contactar <ArrowRight className="ml-2 h-4 w-4" />
+                     Contactar <ArrowRight className="ml-2 h-4 w-4 inline" />
                    </Link>
                  </Button>
                  <Button variant="outline" asChild>
@@ -343,7 +343,7 @@ export default function Home() {
            </p>
            <Button size="lg" asChild className="transition-transform hover:scale-105">
              <Link href="/contact?action=apply">
-               Aplicar Ahora <ArrowRight className="ml-2 h-5 w-5" />
+               Aplicar Ahora <ArrowRight className="ml-2 h-5 w-5 inline" />
              </Link>
            </Button>
          </div>

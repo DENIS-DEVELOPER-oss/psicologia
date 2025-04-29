@@ -114,7 +114,7 @@ export default async function NewsDetailPage() {
          <p className="text-muted-foreground mb-6">Lo sentimos, la noticia que buscas no existe o ha sido movida.</p>
           <Button asChild variant="outline">
            <Link href="/news">
-             <ArrowLeft className="mr-2 h-4 w-4" /> Volver a Noticias
+             <span><ArrowLeft className="mr-2 h-4 w-4 inline" /> Volver a Noticias</span>
            </Link>
          </Button>
        </div>
@@ -125,7 +125,7 @@ export default async function NewsDetailPage() {
     <div className="container py-16 md:py-24 lg:py-32 px-4 md:px-6 max-w-4xl mx-auto">
        <Button asChild variant="outline" className="mb-8">
          <Link href="/news">
-           <ArrowLeft className="mr-2 h-4 w-4" /> Volver a Noticias
+           <span><ArrowLeft className="mr-2 h-4 w-4 inline" /> Volver a Noticias</span>
          </Link>
        </Button>
 

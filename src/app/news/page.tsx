@@ -92,7 +92,7 @@ export default function NewsPage() {
             <CardFooter className="p-4 pt-0">
                <Button variant="link" asChild className="p-0 h-auto text-sm">
                   <Link href={item.link}>
-                    Leer Más <ArrowRight className="ml-1 h-4 w-4" />
+                    <span>Leer Más <ArrowRight className="ml-1 h-4 w-4 inline" /></span>
                   </Link>
                </Button>
             </CardFooter>

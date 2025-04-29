@@ -25,7 +25,7 @@ const quickLinks = [
   { href: '/programs', label: 'Programas' }, // Changed from Plan de Estudios
   { href: '/faculty', label: 'Docentes' },
   // { href: '#', label: 'Estudiantes' }, // Placeholder
-  { href: '/news', label: 'Logros' }, // Changed from Logros to News
+  { href: '/news', label: 'Noticias' }, // Changed from Logros to News
   { href: '/contact', label: 'Contacto' },
 ];
 
@@ -167,5 +167,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-    

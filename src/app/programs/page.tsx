@@ -1,6 +1,7 @@
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookMarked, GraduationCap, ListChecks, Microscope } from "lucide-react";
+import { BookMarked, GraduationCap, ListChecks, Microscope, ArrowRight } from "lucide-react"; // Added ArrowRight
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -122,7 +123,7 @@ export default function ProgramsPage() {
 
                   <Button asChild>
                     <Link href={program.details.admissionLink}>
-                      Información de Admisión
+                       Información de Admisión <ArrowRight className="ml-2 h-4 w-4 inline" />
                     </Link>
                   </Button>
                </AccordionContent>

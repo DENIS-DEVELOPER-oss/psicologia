@@ -1,7 +1,8 @@
+
 'use client';
 
 import Link from 'next/link';
-import { GraduationCap, Menu, X, School } from 'lucide-react'; // Added School icon for Admisión
+import { GraduationCap, Menu, X, School, Award } from 'lucide-react'; // Added Award icon
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
@@ -13,6 +14,7 @@ const navItems = [
   { href: '/about', label: 'Nosotros' },
   { href: '/faculty', label: 'Docentes' },
   { href: '/programs', label: 'Programas' },
+  { href: '/degrees', label: 'Grados y Títulos' }, // Added new link
   { href: '/news', label: 'Noticias y Eventos' },
   { href: '/contact', label: 'Contacto' },
 ];
@@ -30,7 +32,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <nav className="hidden lg:flex items-center space-x-6 text-sm font-medium"> {/* Changed md:flex to lg:flex */}
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -45,14 +47,19 @@ export default function Header() {
           ))}
            <Button asChild className="transition-transform duration-300 hover:scale-105 hover:shadow-md">
              <Link href="/contact?action=apply">
-                <School className="mr-2 h-4 w-4" /> Admisión {/* Changed text and added icon */}
+               {/* Wrap Link children in a Fragment */}
+               <>
+                <School className="mr-2 h-4 w-4 inline" /> Admisión
+               </>
              </Link>
            </Button>
         </nav>
 
         {/* Mobile Navigation */}
+        {/* Use Sheet component for mobile */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
+           {/* Add back asChild to prevent nesting buttons which causes hydration error */}
+           <SheetTrigger asChild className="lg:hidden">
             <Button variant="outline" size="icon">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Abrir menú</span>
@@ -89,7 +96,10 @@ export default function Header() {
                  <SheetClose asChild>
                    <Button asChild className="mt-4 w-full">
                      <Link href="/contact?action=apply">
-                       <School className="mr-2 h-4 w-4" /> Admisión {/* Changed text and added icon */}
+                       {/* Wrap Link children in a Fragment */}
+                       <>
+                         <School className="mr-2 h-4 w-4 inline" /> Admisión
+                       </>
                       </Link>
                    </Button>
                  </SheetClose>
