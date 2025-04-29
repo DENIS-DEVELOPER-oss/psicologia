@@ -2,11 +2,11 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Mail, BookUser, Brain, Heart, BookOpen, Briefcase, Star, UserCheck, UserCog } from 'lucide-react'; // Added icons
+import { Users, Mail, BookUser, Brain, Heart, BookOpen, Briefcase, Star, UserCheck, UserCog } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from '@/lib/utils';
+import { ImageLightbox } from '@/components/ui/image-lightbox'; // Import the new component
 
 // Updated Placeholder data for faculty members with rank and area
 const facultyMembers = [
@@ -101,19 +101,8 @@ export default function FacultyPage() {
       return member.rank === filter;
     }
     if (['clinica', 'educativa', 'organizacional', 'social', 'neuro'].includes(filter)) {
-        // Check if the faculty member belongs to the selected area, potentially considering their title or interests too
         // Simple check based on added 'area' field:
         return member.area === filter;
-        // More complex check (example):
-        // const areaKeywords = {
-        //     clinica: /clínica|psicoterapia|salud mental/i,
-        //     educativa: /educativa|aprendizaje|desarrollo infantil|escolar/i,
-        //     organizacional: /organizacional|laboral|liderazgo|empresas|recursos humanos/i,
-        //     social: /social|comunitaria|grupal|intergrupal/i,
-        //     neuro: /neuropsicología|neurociencia|cognitiva|cerebro/i,
-        // };
-        // const regex = areaKeywords[filter as keyof typeof areaKeywords];
-        // return regex && (regex.test(member.title) || regex.test(member.bio) || regex.test(member.researchInterests));
     }
     return false;
   });
@@ -157,23 +146,19 @@ export default function FacultyPage() {
        {filteredMembers.length > 0 ? (
          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredMembers.map((member) => (
-             <Card key={member.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col group animate-fade-in"> {/* Added animation */}
-               <div className="relative w-full h-56 sm:h-64">
-                 <Image
+             <Card key={member.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col animate-fade-in">
+               <div className="h-56 sm:h-64">
+                 {/* Replace Image with ImageLightbox */}
+                 <ImageLightbox
                    src={member.imageUrl}
                    alt={`Foto de ${member.name}`}
                    fill
-                   style={{ objectFit: 'cover', objectPosition: 'top' }} // Added objectPosition
-                   className="transition-transform duration-500 group-hover:scale-105"
-                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" // Added sizes attribute
+                   style={{ objectFit: 'cover', objectPosition: 'top' }}
+                   className="transition-transform duration-500" // Removed group-hover:scale
+                   triggerClassName="w-full h-full"
+                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                   quality={70}
                  />
-                 {/* Optional overlay for contact info on hover */}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex justify-end items-center space-x-3">
-                    <a href={`mailto:${member.email}`} aria-label={`Enviar correo a ${member.name}`} className="text-white hover:text-primary transition-colors">
-                      <Mail className="h-5 w-5" />
-                    </a>
-                    {/* Add more icons like LinkedIn, ResearchGate if applicable */}
-                 </div>
                </div>
                <CardHeader className="p-4 pb-2">
                   <CardTitle className="text-xl font-semibold text-primary">{member.name}</CardTitle>
@@ -190,13 +175,12 @@ export default function FacultyPage() {
                         <p className="text-sm text-muted-foreground"><strong>Intereses:</strong> {member.researchInterests}</p>
                      </div>
                    </div>
-                  {/* Email link moved to hover overlay, can be kept here as fallback if needed */}
-                   {/* <div className="mt-4 flex items-center gap-2 text-sm text-accent hover:underline">
+                   <div className="mt-4 flex items-center gap-2 text-sm text-accent hover:underline">
                     <Mail className="h-4 w-4" />
                     <a href={`mailto:${member.email}`} aria-label={`Enviar correo a ${member.name}`}>
                       {member.email}
                     </a>
-                  </div> */}
+                  </div>
                 </CardContent>
               </Card>
             ))}

@@ -2,10 +2,10 @@
 'use client'; // Needed for placeholder data simulation
 
 import { useParams } from 'next/navigation';
-import Image from 'next/image';
 import { Calendar, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { ImageLightbox } from '@/components/ui/image-lightbox'; // Import the new component
 
 // Placeholder data for news and events (same as news/page.tsx for simulation)
 const newsItems = [
@@ -131,13 +131,16 @@ export default async function NewsDetailPage() {
 
       <article>
         <header className="mb-8">
-          <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-6 shadow-lg">
-             <Image
+          <div className="w-full aspect-video rounded-lg overflow-hidden mb-6 shadow-lg">
+             {/* Replace Image with ImageLightbox */}
+             <ImageLightbox
                src={newsItem.imageUrl}
                alt={`Imagen para ${newsItem.title}`}
-               fill // Use fill instead of layout
-               style={{ objectFit: 'cover' }} // Use style for objectFit
+               fill
+               style={{ objectFit: 'cover' }}
                priority // Prioritize loading the main image
+               triggerClassName="w-full h-full" // Make trigger div fill container
+               sizes="(max-width: 1024px) 100vw, 896px" // Adjust sizes based on max-w-4xl
              />
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
@@ -184,4 +187,3 @@ export default async function NewsDetailPage() {
  //     // Add Open Graph tags etc.
  //   };
  // }
-

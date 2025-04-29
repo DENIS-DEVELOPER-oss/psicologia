@@ -1,23 +1,26 @@
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, Check, FlaskConical, Handshake, Globe, Lightbulb } from 'lucide-react'; // Added Lightbulb icon
+import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, Check, FlaskConical, Handshake, Globe, Lightbulb } from 'lucide-react';
+import { ImageLightbox } from '@/components/ui/image-lightbox'; // Import the new component
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]"> {/* Adjust for header height */}
       {/* Hero Section */}
       <section className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] flex items-center justify-center text-center">
-        {/* Background Image */}
-        <Image
+        {/* Background Image - Not making this clickable/expandable */}
+        <ImageLightbox
           src="https://picsum.photos/seed/psychology-hero/1920/1080" // Replace with a relevant high-quality image
-          alt="Escuela Profesional de Psicología"
+          alt="Escuela Profesional de Psicología Fondo"
           fill
           style={{ objectFit: 'cover' }}
           className="absolute inset-0 z-0"
           priority // Load image quickly
+          quality={75}
+          triggerWrapperClassName="cursor-default" // Disable zoom cursor for background
+          triggerClassName="pointer-events-none" // Make background image non-interactive for lightbox
         />
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/50 z-10"></div> {/* Dark overlay */}
@@ -33,7 +36,7 @@ export default function Home() {
           <div className="flex flex-col gap-4 sm:flex-row justify-center animate-fade-in-up animation-delay-400">
             <Button size="lg" asChild className="transition-transform hover:scale-105 bg-primary hover:bg-primary/90 text-primary-foreground">
               <Link href="/programs">
-                Ver Programas <ArrowRight className="ml-2 h-5 w-5 inline" />
+                <span>Ver Programas <ArrowRight className="ml-2 h-5 w-5 inline" /></span>
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild className="transition-transform hover:scale-105 border-white text-white hover:bg-white/10 hover:text-white">
@@ -63,7 +66,9 @@ export default function Home() {
               </CardContent>
               <CardFooter>
                  <Button variant="link" asChild className="p-0 h-auto">
-                    <Link href="/about">Leer Más <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
+                    <Link href="/about">
+                       <span>Leer Más <ArrowRight className="ml-1 h-4 w-4 inline" /></span>
+                    </Link>
                  </Button>
               </CardFooter>
             </Card>
@@ -82,7 +87,9 @@ export default function Home() {
               </CardContent>
               <CardFooter>
                  <Button variant="link" asChild className="p-0 h-auto">
-                    <Link href="/programs">Ver Detalles <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
+                    <Link href="/programs">
+                        <span>Ver Detalles <ArrowRight className="ml-1 h-4 w-4 inline" /></span>
+                    </Link>
                  </Button>
               </CardFooter>
             </Card>
@@ -101,7 +108,9 @@ export default function Home() {
               </CardContent>
               <CardFooter>
                  <Button variant="link" asChild className="p-0 h-auto">
-                    <Link href="/news">Ver Noticias <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
+                    <Link href="/news">
+                        <span>Ver Noticias <ArrowRight className="ml-1 h-4 w-4 inline" /></span>
+                    </Link>
                  </Button>
               </CardFooter>
             </Card>
@@ -121,13 +130,16 @@ export default function Home() {
                    <CardTitle className="text-2xl font-semibold text-primary">Mensaje del Director</CardTitle>
                  </CardHeader>
                  <CardContent className="grid md:grid-cols-3 gap-6">
-                   <div className="md:col-span-1 relative h-48 md:h-full rounded-md overflow-hidden">
-                     <Image
+                   <div className="md:col-span-1 h-48 md:h-full rounded-md overflow-hidden">
+                     {/* Replace Image with ImageLightbox */}
+                     <ImageLightbox
                        src="https://picsum.photos/seed/director/300/400"
                        alt="Foto del Director/a - Placeholder"
                        fill
                        style={{ objectFit: "cover", objectPosition: "top" }}
-                       className="transition-transform duration-500 hover:scale-105"
+                       className="transition-transform duration-500" // Removed hover:scale from internal image
+                       triggerClassName="h-full w-full" // Ensure trigger fills the container
+                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 20vw"
                      />
                    </div>
                    <div className="md:col-span-2 space-y-4">
@@ -139,7 +151,9 @@ export default function Home() {
                        <br /><em>- [Nombre del Director/a - Placeholder]</em>
                      </p>
                      <Button variant="link" asChild className="p-0 h-auto">
-                       <Link href="/about">Leer más <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
+                       <Link href="/about">
+                           <span>Leer más <ArrowRight className="ml-1 h-4 w-4 inline" /></span>
+                       </Link>
                      </Button>
                    </div>
                  </CardContent>
@@ -201,7 +215,9 @@ export default function Home() {
                      <li>Neuropsicología</li>
                    </ul>
                     <Button variant="outline" size="sm" asChild className="mt-6 w-full">
-                      <Link href="/programs">Ver más oportunidades <ArrowRight className="ml-1 h-4 w-4 inline" /></Link>
+                      <Link href="/programs">
+                          <span>Ver más oportunidades <ArrowRight className="ml-1 h-4 w-4 inline" /></span>
+                      </Link>
                     </Button>
                  </CardContent>
                </Card>
@@ -234,17 +250,18 @@ export default function Home() {
                { seed: 'conference1', alt: 'Conferencia de psicología' },
                { seed: 'graduation1', alt: 'Ceremonia de graduación' },
              ].map((img, index) => (
-               <div key={index} className="relative aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group">
-                 <Image
+               <div key={index} className="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                 {/* Replace Image with ImageLightbox */}
+                 <ImageLightbox
                    src={`https://picsum.photos/seed/${img.seed}/400/400`}
                    alt={img.alt}
                    fill
                    style={{ objectFit: 'cover' }}
-                   className="transition-transform duration-500 group-hover:scale-105"
+                   className="transition-transform duration-500" // Removed group-hover:scale from internal image
+                   triggerClassName="w-full h-full" // Make the trigger div fill the container
+                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                   quality={60}
                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2">
-                    <p className="text-white text-xs font-medium">{img.alt}</p>
-                  </div>
                </div>
              ))}
            </div>
@@ -271,16 +288,19 @@ export default function Home() {
                </ul>
               <Button asChild variant="outline" className="transition-transform hover:scale-105">
                  <Link href="#">
-                   Explorar PsycheConnect <ArrowRight className="ml-2 h-4 w-4 inline" />
+                   <span>Explorar PsycheConnect <ArrowRight className="ml-2 h-4 w-4 inline" /></span>
                  </Link>
                </Button>
              </div>
-             <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
-                <Image
+             <div className="h-80 rounded-lg overflow-hidden shadow-lg">
+                {/* Replace Image with ImageLightbox */}
+                <ImageLightbox
                   src="https://picsum.photos/seed/platform/600/400"
                   alt="Plataforma PsycheConnect"
                   fill
                   style={{ objectFit: 'cover' }}
+                  triggerClassName="w-full h-full"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
            </div>
@@ -302,8 +322,16 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Map Placeholder */}
             <div className="aspect-video rounded-lg overflow-hidden bg-muted flex items-center justify-center text-muted-foreground shadow-md">
+              {/* Keep Map Placeholder non-interactive */}
               <MapPin className="h-16 w-16 opacity-50" />
               <span className="ml-4 text-xl">Mapa Próximamente</span>
+              {/* <ImageLightbox
+                src="https://picsum.photos/seed/map/800/450" // Replace with static map image if needed
+                alt="Mapa de ubicación de la escuela"
+                fill
+                style={{ objectFit: 'cover' }}
+                triggerClassName="w-full h-full"
+              /> */}
             </div>
             {/* Address and Info */}
             <div className="space-y-4">
@@ -320,7 +348,7 @@ export default function Home() {
                <div className="flex gap-4 pt-4">
                  <Button asChild>
                    <Link href="/contact">
-                     Contactar <ArrowRight className="ml-2 h-4 w-4 inline" />
+                     <span>Contactar <ArrowRight className="ml-2 h-4 w-4 inline" /></span>
                    </Link>
                  </Button>
                  <Button variant="outline" asChild>
@@ -343,7 +371,7 @@ export default function Home() {
            </p>
            <Button size="lg" asChild className="transition-transform hover:scale-105">
              <Link href="/contact?action=apply">
-               Aplicar Ahora <ArrowRight className="ml-2 h-5 w-5 inline" />
+               <span>Aplicar Ahora <ArrowRight className="ml-2 h-5 w-5 inline" /></span>
              </Link>
            </Button>
          </div>

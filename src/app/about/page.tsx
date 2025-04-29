@@ -1,10 +1,10 @@
 
-import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Building, History, Award, Target, Users, Library, Network, Check, FlaskConical, Handshake, Globe, GraduationCap, BookOpen, Server, Lightbulb } from 'lucide-react'; // Added Lightbulb icon
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { ImageLightbox } from '@/components/ui/image-lightbox'; // Import the new component
 
 export default function AboutPage() {
   return (
@@ -49,14 +49,17 @@ export default function AboutPage() {
              <CardTitle className="text-2xl font-semibold text-primary">Mensaje del Director</CardTitle>
            </CardHeader>
            <CardContent className="grid md:grid-cols-3 gap-6 items-center">
-             <div className="md:col-span-1 relative h-48 md:h-56 rounded-md overflow-hidden">
-               <Image
-                 src="https://picsum.photos/seed/director/300/400"
-                 alt="Foto del Director/a - Placeholder"
-                 fill
-                 style={{ objectFit: "cover", objectPosition: "top" }}
-                 className="transition-transform duration-500 hover:scale-105"
-               />
+             <div className="md:col-span-1 h-48 md:h-56 rounded-md overflow-hidden">
+               {/* Replace Image with ImageLightbox */}
+                <ImageLightbox
+                  src="https://picsum.photos/seed/director/300/400"
+                  alt="Foto del Director/a - Placeholder"
+                  fill
+                  style={{ objectFit: "cover", objectPosition: "top" }}
+                  className="transition-transform duration-500" // Removed hover:scale
+                  triggerClassName="w-full h-full"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 20vw"
+                />
              </div>
              <div className="md:col-span-2 space-y-4">
                <p className="text-muted-foreground leading-relaxed">
@@ -110,13 +113,16 @@ export default function AboutPage() {
                   Nuestros egresados se desempeñan exitosamente en diversos ámbitos, reflejando el impacto positivo de nuestra formación.
                  </p>
                </div>
-                <div className="relative h-64 rounded-lg overflow-hidden">
-                 <Image
+                <div className="h-64 rounded-lg overflow-hidden">
+                 {/* Replace Image with ImageLightbox */}
+                  <ImageLightbox
                     src="https://picsum.photos/seed/history/600/400"
                     alt="Hito histórico de la escuela"
                     fill
                     style={{ objectFit: 'cover' }}
-                    className="transition-transform duration-500 hover:scale-105"
+                    className="transition-transform duration-500" // Removed hover:scale
+                    triggerClassName="w-full h-full"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
              </CardContent>
@@ -258,13 +264,16 @@ export default function AboutPage() {
                        <li>Salas de estudio y espacios comunes.</li>
                      </ul>
                     </div>
-                    <div className="relative h-64 rounded-lg overflow-hidden">
-                        <Image
+                    <div className="h-64 rounded-lg overflow-hidden">
+                         {/* Replace Image with ImageLightbox */}
+                        <ImageLightbox
                            src="https://picsum.photos/seed/resources/600/400"
                            alt="Instalaciones de la escuela"
                            fill
                            style={{ objectFit: 'cover' }}
-                           className="transition-transform duration-500 hover:scale-105"
+                           className="transition-transform duration-500" // Removed hover:scale
+                           triggerClassName="w-full h-full"
+                           sizes="(max-width: 768px) 100vw, 50vw"
                          />
                     </div>
                 </CardContent>

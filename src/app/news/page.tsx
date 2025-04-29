@@ -1,10 +1,10 @@
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Newspaper, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ImageLightbox } from '@/components/ui/image-lightbox'; // Import the new component
 
 // Placeholder data for news and events
 const newsItems = [
@@ -63,17 +63,19 @@ export default function NewsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {newsItems.map((item) => (
           <Card key={item.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col">
-            <Link href={item.link} className="block group">
-              <div className="relative w-full h-48 overflow-hidden">
-                <Image
+              {/* Use ImageLightbox for the image */}
+              <div className="h-48"> {/* Fixed height container */}
+                <ImageLightbox
                   src={item.imageUrl}
                   alt={`Imagen para ${item.title}`}
-                  fill // Use fill instead of layout
-                  style={{ objectFit: 'cover' }} // Use style for objectFit
-                  className="transition-transform duration-500 group-hover:scale-105"
+                  fill // Use fill to cover the container
+                  style={{ objectFit: 'cover' }}
+                  className="transition-transform duration-500" // Removed group-hover:scale
+                  triggerClassName="w-full h-full" // Make the trigger div fill the container
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  quality={60} // Lower quality for previews
                 />
               </div>
-            </Link>
             <CardHeader className="p-4 pb-2">
               <div className="flex justify-between items-center mb-2">
                 <Badge variant={item.type === 'Evento' ? 'default' : 'secondary'}>{item.type}</Badge>
