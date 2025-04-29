@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, Check, FlaskConical, Handshake, Globe } from 'lucide-react';
+import { ArrowRight, Newspaper, Users, BookOpen, Camera, MapPin, Rocket, Check, FlaskConical, Handshake, Globe, Lightbulb } from 'lucide-react'; // Added Lightbulb icon
 
 export default function Home() {
   return (
@@ -14,8 +14,8 @@ export default function Home() {
         <Image
           src="https://picsum.photos/seed/psychology-hero/1920/1080" // Replace with a relevant high-quality image
           alt="Escuela Profesional de Psicología"
-          fill // Use fill instead of layout
-          style={{ objectFit: 'cover' }} // Use style for objectFit
+          fill
+          style={{ objectFit: 'cover' }}
           className="absolute inset-0 z-0"
           priority // Load image quickly
         />
@@ -139,7 +139,6 @@ export default function Home() {
                        <br /><em>- [Nombre del Director/a - Placeholder]</em>
                      </p>
                      <Button variant="link" asChild className="p-0 h-auto">
-                       {/* Link to a potential full message page or about page */}
                        <Link href="/about">Leer más <ArrowRight className="ml-1 h-4 w-4" /></Link>
                      </Button>
                    </div>
@@ -175,6 +174,10 @@ export default function Home() {
                      <li className="flex items-start gap-2">
                        <Users className="h-4 w-4 text-accent mt-0.5 shrink-0" />
                        <span>Comunidad estudiantil diversa y dinámica.</span>
+                     </li>
+                      <li className="flex items-start gap-2">
+                       <Lightbulb className="h-4 w-4 text-accent mt-0.5 shrink-0" /> {/* Added Item */}
+                       <span>Participación en proyectos de investigación.</span>
                      </li>
                    </ul>
                  </CardContent>
@@ -235,8 +238,8 @@ export default function Home() {
                  <Image
                    src={`https://picsum.photos/seed/${img.seed}/400/400`}
                    alt={img.alt}
-                   fill // Use fill
-                   style={{ objectFit: 'cover' }} // Use style
+                   fill
+                   style={{ objectFit: 'cover' }}
                    className="transition-transform duration-500 group-hover:scale-105"
                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2">
@@ -245,12 +248,6 @@ export default function Home() {
                </div>
              ))}
            </div>
-           {/* Add a button to link to a full gallery page if needed */}
-           {/* <div className="mt-12 text-center">
-             <Button variant="outline" asChild>
-               <Link href="/gallery">Ver Galería Completa <ArrowRight className="ml-2 h-4 w-4" /></Link>
-             </Button>
-           </div> */}
         </div>
       </section>
 
@@ -273,7 +270,6 @@ export default function Home() {
                  <li>Calendario de eventos y seminarios exclusivos.</li>
                </ul>
               <Button asChild variant="outline" className="transition-transform hover:scale-105">
-                 {/* Update link when PsycheConnect page/section exists */}
                  <Link href="#">
                    Explorar PsycheConnect <ArrowRight className="ml-2 h-4 w-4" />
                  </Link>
@@ -283,8 +279,8 @@ export default function Home() {
                 <Image
                   src="https://picsum.photos/seed/platform/600/400"
                   alt="Plataforma PsycheConnect"
-                  fill // Use fill
-                  style={{ objectFit: 'cover' }} // Use style
+                  fill
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
            </div>
@@ -306,19 +302,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Map Placeholder */}
             <div className="aspect-video rounded-lg overflow-hidden bg-muted flex items-center justify-center text-muted-foreground shadow-md">
-               {/* Replace with an actual map embed later */}
               <MapPin className="h-16 w-16 opacity-50" />
               <span className="ml-4 text-xl">Mapa Próximamente</span>
-               {/* Example Map Embed (replace src): */}
-               {/* <iframe
-                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d..."
-                 width="100%"
-                 height="100%"
-                 style={{ border:0 }}
-                 allowFullScreen={true}
-                 loading="lazy"
-                 referrerPolicy="no-referrer-when-downgrade">
-               </iframe> */}
             </div>
             {/* Address and Info */}
             <div className="space-y-4">
@@ -339,7 +324,6 @@ export default function Home() {
                    </Link>
                  </Button>
                  <Button variant="outline" asChild>
-                    {/* Update link with real address for Google Maps */}
                    <Link href="https://maps.google.com/?q=Placeholder+Address" target="_blank" rel="noopener noreferrer">
                      Ver en Mapa (Externo)
                    </Link>

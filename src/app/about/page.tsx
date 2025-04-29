@@ -1,7 +1,7 @@
 
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Building, History, Award, Target, Users, Library, Network, Check, FlaskConical, Handshake, Globe, GraduationCap, BookOpen, Server } from 'lucide-react'; // Added new icons
+import { Building, History, Award, Target, Users, Library, Network, Check, FlaskConical, Handshake, Globe, GraduationCap, BookOpen, Server, Lightbulb } from 'lucide-react'; // Added Lightbulb icon
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -22,15 +22,15 @@ export default function AboutPage() {
 
         <div className="grid gap-12 md:gap-16">
 
-          {/* Quick Links Row (Previously Nuestra Escuela Profesional section) */}
+          {/* Quick Links Row */}
           <section className="w-full">
              <h2 className="text-3xl font-bold tracking-tight text-center mb-8 text-primary">Nuestra Escuela Profesional</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
              {[
                { title: "Misión y Visión", icon: Target, href: "#mission-vision" }, // Link to sections below
-               { title: "Objetivos Educacionales", icon: BookOpen, href: "#objectives" }, // Placeholder links
+               { title: "Objetivos Educacionales", icon: BookOpen, href: "#objectives" },
                { title: "Perfil del Egresado", icon: GraduationCap, href: "#graduate-profile" },
-               { title: "Recursos", icon: Server, href: "#resources" }, // Or Library icon
+               { title: "Recursos e Infraestructura", icon: Server, href: "#resources" }, // Changed title for consistency
              ].map((item, index) => (
                <Link key={index} href={item.href} className="block group">
                  <Card className="text-center hover:shadow-lg transition-shadow duration-300 p-4 h-full flex flex-col justify-center items-center bg-primary/5 hover:bg-primary/10">
@@ -68,10 +68,6 @@ export default function AboutPage() {
                 <p className="text-muted-foreground leading-relaxed italic">
                  - [Nombre del Director/a - Placeholder], Director/a
                </p>
-               {/* Optionally add a button to a longer message if needed */}
-               {/* <Button variant="link" asChild className="p-0 h-auto">
-                 <Link href="/about/directors-message">Leer mensaje completo <ArrowRight className="ml-1 h-4 w-4" /></Link>
-               </Button> */}
              </div>
            </CardContent>
          </Card>
@@ -118,8 +114,8 @@ export default function AboutPage() {
                  <Image
                     src="https://picsum.photos/seed/history/600/400"
                     alt="Hito histórico de la escuela"
-                    fill // Use fill instead of layout
-                    style={{ objectFit: 'cover' }} // Use style for objectFit
+                    fill
+                    style={{ objectFit: 'cover' }}
                     className="transition-transform duration-500 hover:scale-105"
                   />
                 </div>
@@ -169,6 +165,13 @@ export default function AboutPage() {
                         <p>Ambiente estudiantil diverso, participativo y de apoyo mutuo.</p>
                       </div>
                    </li>
+                   <li className="flex items-start gap-3">
+                     <Lightbulb className="h-5 w-5 text-accent mt-1 shrink-0" /> {/* Added Item */}
+                     <div>
+                       <h4 className="font-medium text-foreground">Fomento a la Investigación</h4>
+                       <p>Participación en proyectos de investigación junto a docentes y acceso a grupos de estudio.</p>
+                     </div>
+                   </li>
                  </ul>
                </CardContent>
              </Card>
@@ -189,11 +192,6 @@ export default function AboutPage() {
               <p className="text-muted-foreground leading-relaxed">
                 Esta acreditación valida la excelencia de nuestros programas académicos, la calificación de nuestro cuerpo docente y la adecuación de nuestra infraestructura y recursos para el aprendizaje. Continuamos trabajando en procesos de mejora continua para asegurar una formación de vanguardia.
               </p>
-              {/* Optionally add logos of accreditation bodies */}
-              {/* <div className="mt-6 flex gap-4">
-                <Image src="/placeholder-logo.png" alt="Accreditation Logo 1" width={100} height={50} />
-                <Image src="/placeholder-logo.png" alt="Accreditation Logo 2" width={100} height={50} />
-              </div> */}
              </CardContent>
            </Card>
 
@@ -213,7 +211,6 @@ export default function AboutPage() {
                     <li>Fomentar el pensamiento crítico y la capacidad de investigación.</li>
                     <li>Promover el compromiso social y la aplicación del conocimiento psicológico para el bienestar comunitario.</li>
                     <li>Cultivar el desarrollo personal y profesional continuo de nuestros estudiantes.</li>
-                    {/* Add more specific objectives */}
                  </ul>
                </CardContent>
              </Card>
@@ -235,7 +232,6 @@ export default function AboutPage() {
                    <li>Aplicar conocimientos psicológicos en diversos contextos (clínico, educativo, organizacional, social).</li>
                    <li>Comunicarse eficazmente y trabajar en equipos multidisciplinarios.</li>
                    <li>Comprometerse con el aprendizaje continuo y el desarrollo profesional.</li>
-                   {/* Add more profile characteristics */}
                  </ul>
                </CardContent>
              </Card>
@@ -260,7 +256,6 @@ export default function AboutPage() {
                        <li>Auditorio para conferencias y eventos académicos.</li>
                        <li>Plataforma virtual de aprendizaje (PsycheConnect - si aplica).</li>
                        <li>Salas de estudio y espacios comunes.</li>
-                       {/* Add more resources */}
                      </ul>
                     </div>
                     <div className="relative h-64 rounded-lg overflow-hidden">
@@ -280,5 +275,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-    
