@@ -26,7 +26,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/50 z-10"></div> {/* Dark overlay */}
 
         {/* Content Box */}
-        <div className="container relative z-20 max-w-3xl mx-auto bg-black/30 backdrop-blur-sm p-8 rounded-lg shadow-xl"> {/* Removed px-4 md:px-6 */}
+        <div className="container px-4 md:px-6 relative z-20 max-w-3xl mx-auto bg-black/30 backdrop-blur-sm p-8 rounded-lg shadow-xl"> {/* Added px-4 md:px-6 */}
           <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-white mb-4 animate-fade-in-up">
             Explora el Mundo de la Psicología
           </h1>
@@ -50,7 +50,7 @@ export default function Home() {
 
       {/* Featured Sections */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-secondary/50">
-        <div className="container"> {/* Removed px-4 md:px-6 */}
+        <div className="container px-4 md:px-6"> {/* Added px-4 md:px-6 */}
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {/* About Preview */}
             <Card className="hover:shadow-lg transition-shadow duration-300 animate-fade-in animation-delay-600">
@@ -120,7 +120,7 @@ export default function Home() {
 
       {/* New Information Section (Inspired by Reference) */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-background">
-        <div className="container"> {/* Removed px-4 md:px-6 */}
+        <div className="container px-4 md:px-6"> {/* Added px-4 md:px-6 */}
            {/* Main Content Grid */}
            <div className="grid lg:grid-cols-3 gap-12">
              {/* Director's Message */}
@@ -229,7 +229,7 @@ export default function Home() {
 
       {/* Gallery Section */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-secondary/50">
-        <div className="container"> {/* Removed px-4 md:px-6 */}
+        <div className="container px-4 md:px-6"> {/* Added px-4 md:px-6 */}
           <header className="text-center mb-12 md:mb-16">
              <Camera className="h-12 w-12 mx-auto text-primary mb-4" />
              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-primary">
@@ -270,7 +270,7 @@ export default function Home() {
 
       {/* Platform/Initiative Section */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-primary/5">
-        <div className="container"> {/* Removed px-4 md:px-6 */}
+        <div className="container px-4 md:px-6"> {/* Added px-4 md:px-6 */}
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <Rocket className="h-12 w-12 text-accent mb-4" />
@@ -309,7 +309,7 @@ export default function Home() {
 
       {/* Location Section */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-background">
-        <div className="container"> {/* Removed px-4 md:px-6 */}
+        <div className="container px-4 md:px-6"> {/* Added px-4 md:px-6 */}
           <header className="text-center mb-12 md:mb-16">
              <MapPin className="h-12 w-12 mx-auto text-primary mb-4" />
              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-primary">
@@ -364,7 +364,7 @@ export default function Home() {
 
        {/* Call to Action Section */}
       <section className="w-full py-16 md:py-24 bg-secondary/50">
-        <div className="container text-center"> {/* Removed px-4 md:px-6 */}
+        <div className="container text-center px-4 md:px-6"> {/* Added px-4 md:px-6 */}
            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-primary mb-4">¿Listo para Empezar Tu Carrera en Psicología?</h2>
            <p className="max-w-xl mx-auto mb-8 text-muted-foreground md:text-lg">
              Da el primer paso hacia tu futuro profesional. Aplica ahora o contáctanos para más información.
