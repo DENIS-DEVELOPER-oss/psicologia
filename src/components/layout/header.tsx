@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { GraduationCap, Menu, X } from 'lucide-react';
+import { GraduationCap, Menu, X, School } from 'lucide-react'; // Added School icon for Admisión
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
@@ -22,11 +22,11 @@ export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm transition-shadow duration-300 hover:shadow-md">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-          <GraduationCap className="h-7 w-7 text-primary" />
-          <span className="font-bold text-lg text-primary">PsycheSite</span>
+        <Link href="/" className="flex items-center gap-2 group" onClick={() => setIsOpen(false)}>
+          <GraduationCap className="h-7 w-7 text-primary transition-transform duration-300 group-hover:rotate-[-15deg]" />
+          <span className="font-bold text-lg text-primary transition-colors duration-300 group-hover:text-primary/80">PsycheSite</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -36,15 +36,17 @@ export default function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                'transition-colors hover:text-primary',
-                pathname === item.href ? 'text-primary font-semibold' : 'text-foreground/60'
+                'transition-colors duration-200 hover:text-primary relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full',
+                pathname === item.href ? 'text-primary font-semibold after:w-full' : 'text-foreground/60'
               )}
             >
               {item.label}
             </Link>
           ))}
-           <Button asChild>
-             <Link href="/contact?action=apply">Aplicar Ahora</Link>
+           <Button asChild className="transition-transform duration-300 hover:scale-105 hover:shadow-md">
+             <Link href="/contact?action=apply">
+                <School className="mr-2 h-4 w-4" /> Admisión {/* Changed text and added icon */}
+             </Link>
            </Button>
         </nav>
 
@@ -86,7 +88,9 @@ export default function Header() {
                 ))}
                  <SheetClose asChild>
                    <Button asChild className="mt-4 w-full">
-                     <Link href="/contact?action=apply">Aplicar Ahora</Link>
+                     <Link href="/contact?action=apply">
+                       <School className="mr-2 h-4 w-4" /> Admisión {/* Changed text and added icon */}
+                      </Link>
                    </Button>
                  </SheetClose>
               </nav>
